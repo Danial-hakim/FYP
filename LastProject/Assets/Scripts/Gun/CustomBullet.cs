@@ -78,13 +78,13 @@ public class CustomBullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Don't count collisions with other bullets
-        if (collision.collider.CompareTag("Bullet")) return;
+        //if (collision.collider.CompareTag("Bullet")) return;
 
         //Count up collisions
         collisions++;
 
         //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        //if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
     }
 
     private void Setup()
