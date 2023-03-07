@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 2711310938694339480}
   - component: {fileID: 2711310938694339485}
   - component: {fileID: 2711310938694339486}
-  - component: {fileID: 2711310938694339487}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TopSphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2711310938694339487
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711310938694339481}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2711310939172608193
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,10 +94,9 @@ GameObject:
   - component: {fileID: 2711310939172608192}
   - component: {fileID: 2711310939172608197}
   - component: {fileID: 2711310939172608198}
-  - component: {fileID: 2711310939172608199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BottomSphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,19 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2711310939172608199
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711310939172608193}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2711310939994224462
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,9 +182,10 @@ GameObject:
   - component: {fileID: 2711310939994224311}
   - component: {fileID: 2711310939994224304}
   - component: {fileID: 5669483904351376427}
-  m_Layer: 0
+  - component: {fileID: 2711310939037823925}
+  m_Layer: 7
   m_Name: Bot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +269,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &2711310939994224305
 NavMeshAgent:
@@ -308,7 +281,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -332,8 +305,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145d275b466a0514a8f352c06babba71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImmuneToDamage: 0
   currentState: 
   path: {fileID: 0}
+  explosion: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
 --- !u!114 &2711310939994224304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +336,19 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!114 &2711310939037823925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711310939994224462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52109afe999edf4590096fee4ad79c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTimer: 100
 --- !u!1 &2711310940519635262
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,10 +360,9 @@ GameObject:
   - component: {fileID: 2711310940519635261}
   - component: {fileID: 2711310940519635234}
   - component: {fileID: 2711310940519635235}
-  - component: {fileID: 2711310940519635260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MidSphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,16 +432,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2711310940519635260
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711310940519635262}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

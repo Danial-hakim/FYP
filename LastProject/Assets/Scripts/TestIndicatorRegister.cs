@@ -20,10 +20,8 @@ public class TestIndicatorRegister : MonoBehaviour
 
     void Register()
     {
-        Debug.Log("called");
         if(!DI_System.CheckIfObjectInSight(this.transform))
         {
-            Debug.Log("created");
             DI_System.CreateIndicator(this.transform);
         }
         Destroy(this.gameObject, destroyTimer);

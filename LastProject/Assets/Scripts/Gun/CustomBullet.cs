@@ -24,6 +24,7 @@ public class CustomBullet : MonoBehaviour
     public int explosionDamage;
     public float explosionRange;
     public float explosionForce;
+    public float damage;
 
     //Lifetime
     public int maxCollisions;
@@ -59,16 +60,14 @@ public class CustomBullet : MonoBehaviour
         {
             //Get component of enemy and call Take Damage
 
-            //Just an example!
-            ///enemies[i].GetComponent<ShootingAi>().TakeDamage(explosionDamage);
+            enemies[i].GetComponent<Enemy>().TakeDamageEffect(0.2f,damage);
 
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
         }
 
-        //Add a little delay, just to make sure everything works fine
-        Invoke("Delay", 0.05f);
+        Delay();
     }
     private void Delay()
     {
@@ -77,14 +76,15 @@ public class CustomBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Don't count collisions with other bullets
-        //if (collision.collider.CompareTag("Bullet")) return;
-
         //Count up collisions
         collisions++;
 
         //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-        //if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
+        {
+            Explode();
+        }
+            
     }
 
     private void Setup()

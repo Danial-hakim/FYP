@@ -46,6 +46,6 @@ public class DI_System : MonoBehaviour
     bool InSight(Transform t)
     {
         Vector3 screenPoint = camera.WorldToViewportPoint(t.position);
-        return screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        return false;//screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
     }
 }
