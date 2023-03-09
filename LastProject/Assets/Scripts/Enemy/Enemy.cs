@@ -21,6 +21,11 @@ public class Enemy : MonoBehaviour
     float health = 5;
 
     public GameObject explosion;
+
+    public GameObject player;
+
+    int chaseRange = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +46,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        playerInRange();
     }
 
     public void TakeDamageEffect(float immuneDuration, float damage)
@@ -84,6 +89,17 @@ public class Enemy : MonoBehaviour
         if(health < 0)
         {
             Explode();
+        }
+    }
+
+    void playerInRange()
+    {
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        //Debug.Log(distance);
+
+        if (Vector3.Distance(transform.position,player.transform.position) < chaseRange)
+        {
+            
         }
     }
 }

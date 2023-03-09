@@ -6,6 +6,7 @@ public class PatrolState : BaseState
 {
     public int waypointIndex;
     public float waitTimer;
+
     public override void Enter()
     {
     }
@@ -19,7 +20,7 @@ public class PatrolState : BaseState
     {
     }
 
-    public void PatrolCycle()
+    void PatrolCycle()
     {
         if(enemy.Agent.remainingDistance < 0.2f)
         {
@@ -33,7 +34,6 @@ public class PatrolState : BaseState
                 else
                 {
                     waypointIndex = 0;
-
                 }
                 enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
                 waitTimer = 0;
