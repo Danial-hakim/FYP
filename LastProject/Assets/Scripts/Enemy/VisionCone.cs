@@ -44,7 +44,7 @@ public class VisionCone : MonoBehaviour
             Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
             if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
-                Vertices[i + 1] = VertForward * hit.distance;
+                Vertices[i + 1] = VertForward * hit.distance;            
             }
             else
             {

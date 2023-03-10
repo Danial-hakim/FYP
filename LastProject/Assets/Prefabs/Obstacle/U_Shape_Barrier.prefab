@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 805421982983970709}
   m_Layer: 8
   m_Name: U_Shape_Barrier
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 1067104606979952889}
   m_Layer: 8
   m_Name: MiddleCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4081616905083127885}
   m_Layer: 8
   m_Name: BottomCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 7748337447134217842}
   m_Layer: 8
   m_Name: BottomCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 8425365990561730031}
   m_Layer: 8
   m_Name: TopLeft
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 7078671516824647941}
   m_Layer: 8
   m_Name: MiddleCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 6172878183972736687}
   m_Layer: 8
   m_Name: MiddleCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 7366482180325654866}
   m_Layer: 8
   m_Name: BottomCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 4839703011348093647}
   m_Layer: 8
   m_Name: BottomCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 8691223454913988535}
   m_Layer: 8
   m_Name: MiddleCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 8691223455136218189}
   m_Layer: 8
   m_Name: TopRight
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 8691223455420494261}
   m_Layer: 8
   m_Name: MiddleCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 6542570589293456424}
   m_Layer: 8
   m_Name: BottomCubes
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
