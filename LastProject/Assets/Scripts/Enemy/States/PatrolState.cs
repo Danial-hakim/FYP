@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PatrolState : BaseState
 {
-    public int waypointIndex;
-    public float waitTimer;
-
+    float waitTimer;
+    int randomChoice;
+    int previousChoice;
     public override void Enter()
     {
     }
@@ -22,21 +22,19 @@ public class PatrolState : BaseState
 
     void PatrolCycle()
     {
+        enemy.Agent.speed = 3;
         if(enemy.Agent.remainingDistance < 0.2f)
         {
             waitTimer += Time.deltaTime;
-            if(waitTimer > 3)
+            if(waitTimer > 2)
             {
-                if (waypointIndex < enemy.path.waypoints.Count - 1)
+                while(previousChoice == randomChoice)
                 {
-                    waypointIndex++;
+                    randomChoice = Random.Range(0, enemy.path.waypoints.Count);
                 }
-                else
-                {
-                    waypointIndex = 0;
-                }
-                enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+                enemy.Agent.SetDestination(enemy.path.waypoints[randomChoice].position);
                 waitTimer = 0;
+                previousChoice = randomChoice;
             }
         }
     }
