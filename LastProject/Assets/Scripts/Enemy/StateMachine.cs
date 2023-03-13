@@ -13,7 +13,7 @@ public class StateMachine : MonoBehaviour
     {
         chaseState = new ChaseState();
         patrolState = new PatrolState();
-        playerIsFound = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer;
+        //playerIsFound = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer;
         ChangeState(patrolState);
     }
     // Start is called before the first frame update
@@ -31,13 +31,12 @@ public class StateMachine : MonoBehaviour
         }
         if(GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer)
         {
+            Debug.Log("Chase");
             ChangeState(chaseState);
-            Debug.Log("Chasing Player");
         }
         else
         {
             ChangeState(patrolState);
-            Debug.Log("Patrolling");
         }
     }
 

@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &795610716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795610717}
+  - component: {fileID: 795610718}
+  m_Layer: 0
+  m_Name: VisionCone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795610717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795610716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2711310939994224306}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &795610718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795610716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1286c16d4233fcc479b2601981f5e124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisionConeMaterial: {fileID: 2100000, guid: ce579d9dce686ee488f1e9f4e4506455, type: 2}
+  VisionRange: 8
+  VisionAngle: 120
+  VisionObstructingLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  VisionConeResolution: 120
 --- !u!1 &2711310938694339481
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +234,7 @@ GameObject:
   - component: {fileID: 2711310939994224304}
   - component: {fileID: 5669483904351376427}
   - component: {fileID: 2711310939037823925}
+  - component: {fileID: 2711310939037823933}
   m_Layer: 7
   m_Name: Bot
   m_TagString: Enemy
@@ -205,6 +257,7 @@ Transform:
   - {fileID: 2711310938694339480}
   - {fileID: 2711310940519635261}
   - {fileID: 2711310939172608192}
+  - {fileID: 795610717}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -349,6 +402,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTimer: 100
+--- !u!114 &2711310939037823933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711310939994224462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034976d8e28e5bf4cab7ab2f5e06ba3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 8
+  angle: 120
+  playerRef: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2711310940519635262
 GameObject:
   m_ObjectHideFlags: 0
