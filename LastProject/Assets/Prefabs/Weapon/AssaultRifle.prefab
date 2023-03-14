@@ -187,7 +187,7 @@ MonoBehaviour:
   upwardForce: 0
   timeBetweenShooting: 0.1
   spread: 0
-  reloadTime: 1.5
+  reloadTime: 0.5
   timeBetweenShots: 0
   magazineSize: 100
   bulletsPerTap: 1

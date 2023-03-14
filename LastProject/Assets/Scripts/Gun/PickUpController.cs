@@ -15,6 +15,9 @@ public class PickUpController : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
 
+    private bool isRightClicking = false;
+    private float rightClickDuration;
+
     private void Start()
     {
         //Setup
@@ -37,10 +40,25 @@ public class PickUpController : MonoBehaviour
     {
         //Check if player is in range and "E" is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(2)) && !slotFull) PickUp();
 
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
+
+        //One hand Controller
+        if (Input.GetMouseButtonDown(2))
+        {
+            isRightClicking = true;
+            rightClickDuration = Time.time;
+        }
+        if ( Input.GetMouseButton(2) && Time.time - rightClickDuration > 1.0f)
+        {
+            if (equipped && isRightClicking)
+            {
+                Drop();
+            }
+            isRightClicking = false;
+        }   
     }
 
     private void PickUp()
