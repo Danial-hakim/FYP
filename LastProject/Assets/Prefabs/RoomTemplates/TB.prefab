@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4742412821015508280}
   - component: {fileID: 1585572457}
   - component: {fileID: 1585572456}
+  - component: {fileID: 2414864079635528063}
   m_Layer: 0
   m_Name: 'SpawnPoint '
   m_TagString: SpawnPoint
@@ -96,6 +97,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2414864079635528063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742412821015508281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808192664b9aa094e9b197b4e9815efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openingDirection: 2
+  spawned: 0
+  waitTime: 4
 --- !u!1 &4742412821095771081
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4742412822268782292}
+  - component: {fileID: 9200896770847247244}
   m_Layer: 0
   m_Name: TB
   m_TagString: Untagged
@@ -752,6 +769,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &9200896770847247244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742412822268782293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55b095df9ab9c146855fdc074a79329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4742412822269172131
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +792,7 @@ GameObject:
   - component: {fileID: 4742412822269172130}
   - component: {fileID: 704530175}
   - component: {fileID: 704530174}
+  - component: {fileID: 3964331462267304336}
   m_Layer: 0
   m_Name: SpawnPoint  (1)
   m_TagString: SpawnPoint
@@ -815,6 +845,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3964331462267304336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742412822269172131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808192664b9aa094e9b197b4e9815efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openingDirection: 1
+  spawned: 0
+  waitTime: 4
 --- !u!1 &4742412822356414423
 GameObject:
   m_ObjectHideFlags: 0
