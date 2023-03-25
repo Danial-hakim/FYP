@@ -30,8 +30,9 @@ public class RoomSpawner : MonoBehaviour
 	void Spawn()
 	{
 		roomNum = templates.rooms.Count;
+		Debug.Log(roomNum);
 
-		if (spawned == false && roomNum < 25)
+		if (spawned == false)
 		{		
 			if (openingDirection == 1)
 			{
@@ -61,12 +62,13 @@ public class RoomSpawner : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("SpawnPoint"))
 		{
 			if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
 			{
+				Debug.Log("stack");
 				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
 				Destroy(gameObject);
 			}

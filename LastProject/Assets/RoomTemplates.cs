@@ -19,7 +19,6 @@ public class RoomTemplates : MonoBehaviour
 
 	void Update()
 	{
-
 		if (waitTime <= 0 && spawnedBoss == false)
 		{
 			for (int i = 0; i < rooms.Count; i++)
