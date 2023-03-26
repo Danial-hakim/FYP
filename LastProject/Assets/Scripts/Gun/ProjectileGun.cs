@@ -6,6 +6,7 @@ public class ProjectileGun : MonoBehaviour
 {
     //bullet 
     public GameObject bullet;
+    Renderer bulletRenderer;
 
     //bullet force
     public float shootForce, upwardForce;
@@ -98,6 +99,12 @@ public class ProjectileGun : MonoBehaviour
 
         //Instantiate bullet/projectile
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
+        if(bulletRenderer != null)
+        {
+            Debug.Log(bulletRenderer.material.color);
+            currentBullet.GetComponent<Renderer>().material.color = bulletRenderer.material.color;
+            currentBullet.GetComponentInChildren<TrailRenderer>().startColor = bulletRenderer.material.color;
+        }
         //Rotate bullet to shoot direction
         currentBullet.transform.forward = directionWithSpread.normalized;
 
@@ -143,5 +150,26 @@ public class ProjectileGun : MonoBehaviour
         //Fill magazine
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+    public void UpdateElement(Renderer newRenderer)
+    {
+        bulletRenderer = newRenderer;
+    }
+
+    public void UpdateGunModification(float shootForce, float upwardForce, float spread, int bulletPerTap, bool allowButtonHold, float timeBetweenShots,float timeBetweenShooting)
+    {
+        this.shootForce = shootForce;
+        this.upwardForce = upwardForce;
+        this.spread = spread;
+        this.bulletsPerTap = bulletPerTap;
+        this.allowButtonHold = allowButtonHold;
+        this.timeBetweenShots = timeBetweenShots;
+        this.timeBetweenShooting = timeBetweenShooting;
+    }
+
+    public void UpdateReloadTime(float reloadTime)
+    {
+        this.reloadTime = reloadTime;
     }
 }

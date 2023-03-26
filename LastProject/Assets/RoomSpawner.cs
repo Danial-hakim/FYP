@@ -30,7 +30,7 @@ public class RoomSpawner : MonoBehaviour
 	void Spawn()
 	{
 		roomNum = templates.rooms.Count;
-		Debug.Log(roomNum);
+		//Debug.Log(roomNum);
 
 		if (spawned == false)
 		{		
@@ -66,7 +66,9 @@ public class RoomSpawner : MonoBehaviour
 	{
 		if (other.CompareTag("SpawnPoint"))
 		{
-			if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            Debug.Log("taken");
+			Debug.Log(other.tag);
+            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
 			{
 				Debug.Log("stack");
 				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);

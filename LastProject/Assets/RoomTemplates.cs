@@ -34,5 +34,7 @@ public class RoomTemplates : MonoBehaviour
 		{
 			waitTime -= Time.deltaTime;
 		}
+
+		if(waitTime <= 0) { waitTime = 0; }
 	}
 }

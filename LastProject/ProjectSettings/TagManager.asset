@@ -9,6 +9,8 @@ TagManager:
   - Walls
   - SpawnPoint
   - Rooms
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Enemy
   - Walls
   - Player
-  - 
+  - Bullet
   - 
   - 
   - 

@@ -137,7 +137,7 @@ MonoBehaviour:
   pickUpRange: 4
   dropForwardForce: 15
   dropUpwardForce: 7
-  equipped: 1
+  equipped: 0
 --- !u!1 &6475712030088240489
 GameObject:
   m_ObjectHideFlags: 0
