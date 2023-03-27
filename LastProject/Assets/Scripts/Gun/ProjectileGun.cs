@@ -101,10 +101,10 @@ public class ProjectileGun : MonoBehaviour
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
         if(bulletRenderer != null)
         {
-            Debug.Log(bulletRenderer.material.color);
             currentBullet.GetComponent<Renderer>().material.color = bulletRenderer.material.color;
             currentBullet.GetComponentInChildren<TrailRenderer>().startColor = bulletRenderer.material.color;
         }
+        currentBullet.GetComponent<CustomBullet>().updateBulletElement();
         //Rotate bullet to shoot direction
         currentBullet.transform.forward = directionWithSpread.normalized;
 

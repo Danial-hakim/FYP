@@ -22,21 +22,21 @@ public class PatrolState : BaseState
 
     void PatrolCycle()
     {
-        enemy.Agent.speed = 3;
-        if(enemy.Agent.remainingDistance < 0.2f)
-        {
-            waitTimer += Time.deltaTime;
-            if(waitTimer > 2)
-            {
-                while(previousChoice == randomChoice)
-                {
-                    randomChoice = Random.Range(0, enemy.path.waypoints.Count);
-                }
-                enemy.Agent.SetDestination(enemy.path.waypoints[randomChoice].position);
-                waitTimer = 0;
-                previousChoice = randomChoice;
-            }
-        }
+        //enemy.Agent.speed = 3;
+        //if(enemy.Agent.remainingDistance < 0.2f)
+        //{
+        //    waitTimer += Time.deltaTime;
+        //    if(waitTimer > 2)
+        //    {
+        //        while(previousChoice == randomChoice)
+        //        {
+        //            randomChoice = Random.Range(0, enemy.path.waypoints.Count);
+        //        }
+        //        enemy.Agent.SetDestination(enemy.path.waypoints[randomChoice].position);
+        //        waitTimer = 0;
+        //        previousChoice = randomChoice;
+        //    }
+        //}
     }
 
 }

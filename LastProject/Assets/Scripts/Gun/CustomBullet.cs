@@ -10,6 +10,14 @@
 /// Dave
 public class CustomBullet : MonoBehaviour
 {
+    public enum ElementType
+    {
+        Fire,
+        Water,
+        Ice,
+        Lightning,
+        None
+    }
     //Assignables
     public Rigidbody rb;
     public GameObject explosion;
@@ -34,9 +42,14 @@ public class CustomBullet : MonoBehaviour
     int collisions;
     PhysicMaterial physics_mat;
 
+    //Element Color
+    Color currentColor;
+    ElementType currentElement;
+
     private void Start()
     {
         Setup();
+        //currentElement = ElementType.None;
     }
 
     private void Update()
@@ -61,6 +74,7 @@ public class CustomBullet : MonoBehaviour
             //Get component of enemy and call Take Damage
 
             enemies[i].GetComponent<Enemy>().TakeDamageEffect(0.2f,damage);
+            CheckElement(enemies[i].GetComponent<Enemy>());
 
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
@@ -83,8 +97,7 @@ public class CustomBullet : MonoBehaviour
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
         {
             Explode();
-        }
-            
+        }         
     }
 
     private void Setup()
@@ -106,5 +119,39 @@ public class CustomBullet : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRange);
+    }
+
+    private void CheckElement(Enemy enemy) 
+    {
+       switch(currentElement) 
+       {
+            case ElementType.Fire:
+                enemy.setOnFire();
+                //Debug.Log("fire function");
+                break;
+            case ElementType.Water:
+                Debug.Log("water function");
+                break;
+            case ElementType.Ice:
+                Debug.Log("ice function");
+                break;
+            case ElementType.Lightning:
+                Debug.Log("lightning function");
+                break;
+            default:
+                Debug.Log("None");
+                break;
+       };
+    }
+
+    public void updateBulletElement()
+    {
+        currentColor = gameObject.GetComponent<Renderer>().material.color;
+
+        if (currentColor == Color.red) { currentElement = ElementType.Fire; }
+        else if (currentColor == Color.blue) { currentElement = ElementType.Water; }
+        else if (currentColor == Color.cyan) { currentElement = ElementType.Ice; }
+        else if (currentColor == Color.yellow) { currentElement = ElementType.Lightning; }
+        else { currentElement = ElementType.None; };
     }
 }

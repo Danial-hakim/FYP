@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -18,9 +19,14 @@ public class Enemy : MonoBehaviour
     private string currentState;
     public Path path;
 
-    float health = 5;
+    float health = 100;
+    public Slider healthBar;
 
     public GameObject explosion;
+
+    public bool onFire = false;
+    float fireDuration = 5;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +47,23 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        healthBar.value = health;
+
+        //if(onFire && fireDuration > 0)
+        //{
+        //    Debug.Log("Take fire damage");
+        //    health--;
+        //    fireDuration -= Time.fixedDeltaTime;
+        //}
+        //else if(fireDuration <= 0)
+        //{
+        //    onFire = false;
+        //    fireDuration = 5;
+        //}
     }
 
     public void TakeDamageEffect(float immuneDuration, float damage)
     {
-        Debug.Log("Hit");
         // Get the renderer component of the game object
         renderer = GetComponent<Renderer>();
 
@@ -55,6 +72,10 @@ public class Enemy : MonoBehaviour
         {
             // Start a coroutine that flashes the game object red and back to its original color
             StartCoroutine(FlashColor(renderer, immuneDuration));
+        }
+        if(onFire)
+        {
+            StartCoroutine(TakeFireDamage());
         }
         calculateRemainingHealth(damage);
     }
@@ -86,4 +107,22 @@ public class Enemy : MonoBehaviour
             Explode();
         }
     }
+
+    IEnumerator TakeFireDamage()
+    {
+        for(int i = 0; i < fireDuration;i++)
+        {           
+            yield return new WaitForSeconds(0.5f);
+            health -= 1;
+            Debug.Log(health);
+        }
+
+        onFire = false;
+    }
+
+    public void setOnFire()
+    {
+        onFire = true;
+    }
 }
+  
