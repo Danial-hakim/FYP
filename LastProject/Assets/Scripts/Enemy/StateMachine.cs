@@ -29,15 +29,15 @@ public class StateMachine : MonoBehaviour
         {
             activeState.Perform();
         }
-        if(GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer)
-        {
-            Debug.Log("Chase");
-            ChangeState(chaseState);
-        }
-        else
-        {
-            ChangeState(patrolState);
-        }
+        //if(GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer)
+        //{
+        //    Debug.Log("Chase");
+        //    //ChangeState(chaseState);
+        //}
+        //else
+        //{
+        //    ChangeState(patrolState);
+        //}
     }
 
     public void ChangeState(BaseState newState)

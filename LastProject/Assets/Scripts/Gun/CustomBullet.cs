@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// Thanks for downloading my custom bullets/projectiles script! :D
 /// Feel free to use it in any project you like!
@@ -21,6 +22,7 @@ public class CustomBullet : MonoBehaviour
     //Assignables
     public Rigidbody rb;
     public GameObject explosion;
+    public GameObject lightningExplosion;
     public LayerMask whatIsEnemies;
 
     //Stats
@@ -65,16 +67,25 @@ public class CustomBullet : MonoBehaviour
     private void Explode()
     {
         //Instantiate explosion
-        if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
+        if(currentElement == ElementType.Lightning)
+        {
+            Instantiate(lightningExplosion, transform.position, Quaternion.identity);
+            explosionRange = 3;
+        }
+        else
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            explosionRange = 1;
+        }
+        //if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
             //Get component of enemy and call Take Damage
-
-            enemies[i].GetComponent<Enemy>().TakeDamageEffect(0.2f,damage);
             CheckElement(enemies[i].GetComponent<Enemy>());
+            enemies[i].GetComponent<Enemy>().TakeDamageEffect(0.2f,damage);
 
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
@@ -126,13 +137,22 @@ public class CustomBullet : MonoBehaviour
        switch(currentElement) 
        {
             case ElementType.Fire:
-                enemy.setOnFire();
-                //Debug.Log("fire function");
+                if(!enemy.onFire)
+                {
+                    enemy.onFire = true;
+                }
                 break;
             case ElementType.Water:
-                Debug.Log("water function");
+                if(!enemy.beingSlowed)
+                {
+                    enemy.beingSlowed = true;
+                }
                 break;
             case ElementType.Ice:
+                if (!enemy.currentlyFrozen)
+                {
+                    enemy.currentlyFrozen = true;
+                }
                 Debug.Log("ice function");
                 break;
             case ElementType.Lightning:
@@ -148,10 +168,23 @@ public class CustomBullet : MonoBehaviour
     {
         currentColor = gameObject.GetComponent<Renderer>().material.color;
 
-        if (currentColor == Color.red) { currentElement = ElementType.Fire; }
-        else if (currentColor == Color.blue) { currentElement = ElementType.Water; }
-        else if (currentColor == Color.cyan) { currentElement = ElementType.Ice; }
-        else if (currentColor == Color.yellow) { currentElement = ElementType.Lightning; }
-        else { currentElement = ElementType.None; };
+        // Define a dictionary that maps colors to element types
+        Dictionary<Color, ElementType> colorToElementMap = new Dictionary<Color, ElementType>
+        {
+            { Color.red, ElementType.Fire },
+            { Color.blue, ElementType.Water },
+            { Color.cyan, ElementType.Ice },
+            { Color.yellow, ElementType.Lightning }
+        };
+
+        // Check if the current color is in the dictionary, and assign the corresponding element type
+        if (colorToElementMap.TryGetValue(currentColor, out ElementType elementType))
+        {
+            currentElement = elementType;
+        }
+        else
+        {
+            currentElement = ElementType.None;
+        }
     }
 }

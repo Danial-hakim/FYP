@@ -9,6 +9,7 @@ public class PatrolState : BaseState
     int previousChoice;
     public override void Enter()
     {
+        enemy.Agent.speed = 3;
     }
 
     public override void Perform()
@@ -22,21 +23,20 @@ public class PatrolState : BaseState
 
     void PatrolCycle()
     {
-        //enemy.Agent.speed = 3;
-        //if(enemy.Agent.remainingDistance < 0.2f)
-        //{
-        //    waitTimer += Time.deltaTime;
-        //    if(waitTimer > 2)
-        //    {
-        //        while(previousChoice == randomChoice)
-        //        {
-        //            randomChoice = Random.Range(0, enemy.path.waypoints.Count);
-        //        }
-        //        enemy.Agent.SetDestination(enemy.path.waypoints[randomChoice].position);
-        //        waitTimer = 0;
-        //        previousChoice = randomChoice;
-        //    }
-        //}
+        if (enemy.Agent.remainingDistance < 0.2f)
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer > 2)
+            {
+                while (previousChoice == randomChoice)
+                {
+                    randomChoice = Random.Range(0, enemy.path.waypoints.Count);
+                }
+                enemy.Agent.SetDestination(enemy.path.waypoints[randomChoice].position);
+                waitTimer = 0;
+                previousChoice = randomChoice;
+            }
+        }
     }
 
 }

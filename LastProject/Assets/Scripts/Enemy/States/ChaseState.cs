@@ -6,6 +6,7 @@ public class ChaseState : BaseState
 {
     public override void Enter()
     {
+        enemy.Agent.speed = 7;
     }
 
     public override void Perform()
@@ -19,7 +20,6 @@ public class ChaseState : BaseState
 
     void ChasePlayer()
     {
-        enemy.Agent.speed = 7;
         enemy.Agent.SetDestination(GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);
     }
 }

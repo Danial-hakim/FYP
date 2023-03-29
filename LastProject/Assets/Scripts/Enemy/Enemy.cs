@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent { get => agent; }
 
     private Color originalColor;
-    private Renderer renderer;
-    public bool isImmuneToDamage;
+    private new Renderer renderer;
+    private bool isImmuneToDamage;
 
     [SerializeField]
     private string currentState;
@@ -24,9 +24,15 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosion;
 
-    public bool onFire = false;
+    //statusAilment
+    public bool onFire { get; set; } = false;
     float fireDuration = 5;
-  
+
+    public bool beingSlowed { get; set; } = false;
+    float slowedDuration = 3;
+
+    public bool currentlyFrozen { get; set; } = false;
+    float freezeDuration = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,18 +54,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         healthBar.value = health;
-
-        //if(onFire && fireDuration > 0)
-        //{
-        //    Debug.Log("Take fire damage");
-        //    health--;
-        //    fireDuration -= Time.fixedDeltaTime;
-        //}
-        //else if(fireDuration <= 0)
-        //{
-        //    onFire = false;
-        //    fireDuration = 5;
-        //}
     }
 
     public void TakeDamageEffect(float immuneDuration, float damage)
@@ -76,6 +70,14 @@ public class Enemy : MonoBehaviour
         if(onFire)
         {
             StartCoroutine(TakeFireDamage());
+        }
+        else if(beingSlowed)
+        {
+            StartCoroutine(ReduceMoveSpeed());
+        }
+        else if(currentlyFrozen)
+        {
+            StartCoroutine(Frozen());
         }
         calculateRemainingHealth(damage);
     }
@@ -112,17 +114,29 @@ public class Enemy : MonoBehaviour
     {
         for(int i = 0; i < fireDuration;i++)
         {           
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             health -= 1;
-            Debug.Log(health);
         }
 
         onFire = false;
     }
 
-    public void setOnFire()
+    IEnumerator ReduceMoveSpeed()
     {
-        onFire = true;
+        float currentSpeed = agent.speed;
+        agent.speed = currentSpeed * 0.5f;
+        yield return new WaitForSeconds(slowedDuration);
+        agent.speed = currentSpeed;
+        beingSlowed = false;
+    }
+
+    IEnumerator Frozen()
+    {
+        float currentSpeed = agent.speed;
+        agent.speed = 0;
+        yield return new WaitForSeconds(freezeDuration);
+        agent.speed = currentSpeed;
+        beingSlowed = false;
     }
 }
   
