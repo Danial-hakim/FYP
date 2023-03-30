@@ -158,20 +158,20 @@ public class Enemy : MonoBehaviour
         iceResistance--;
     }
 
-    private Dictionary<string, float> resistances = new Dictionary<string, float>()
+    static Dictionary<string, float> resistances = new Dictionary<string, float>()
     {
-        {"Fire", 0f},
-        {"Water", 0f},
-        {"Ice", 0f},
-        {"Lightning", 0f},
+        {"Fire", fireResistance},
+        {"Water", waterResistance},
+        {"Ice", iceResistance},
+        {"Lightning", lightningResistance},
     };
 
     List<(string element, float multiplier)> resistanceModifiers = new List<(string, float)>
     {
-        ("Fire", 1f),
-        ("Water", 1f),
-        ("Ice", 1f),
-        ("Lightning", 0.25f)
+        ("Fire", 2f),
+        ("Water", 2f),
+        ("Ice", 2f),
+        ("Lightning", 1f)
     };
 
     void UpdateResistance()
@@ -187,72 +187,29 @@ public class Enemy : MonoBehaviour
                 resistances[modifier.element] += modifier.multiplier;
                 currentElement = modifier.element;
             }
-            else if (modifier.element == "Lightning")
-            {
-                resistances[modifier.element] += modifier.multiplier;
-            }
-
-            // clamp the resistance value to be at least 0
-            //resistances[modifier.element] = Mathf.Max(resistances[modifier.element], 0f);
         }
 
         foreach (var otherModifier in resistanceModifiers)
         {
             if (otherModifier.element != currentElement)
             {
-                resistances[otherModifier.element] -= otherModifier.multiplier;
+                if (resistances[otherModifier.element] > 0)
+                {
+                    resistances[otherModifier.element] -= otherModifier.multiplier;
+                }
             }
-            // clamp the resistance value to be at least 0
-            //resistances[otherModifier.element] = Mathf.Max(resistances[otherModifier.element], 0f);
         }
+
+        fireResistance = resistances["Fire"];
+        waterResistance = resistances["Water"];
+        iceResistance = resistances["Ice"];
+        lightningResistance = resistances["Lightning"];
 
         foreach (var mod in resistances)
         {
             Debug.Log(mod.Key + " : " + mod.Value);
         }
 
-        // need to fix this
     }
-    //void UpdateResistance()
-    //{
-    //    if (onFire)
-    //    {
-    //        fireResistance++;
-    //        waterResistance--;
-    //        iceResistance--;
-    //        lightningResistance -= 0.25f;
-    //    }
-    //    else if (beingSlowed)
-    //    {
-    //        waterResistance++;
-    //        fireResistance--;
-    //        iceResistance--;
-    //        lightningResistance -= 0.25f;
-    //    }
-    //    else if (currentlyFrozen)
-    //    {
-    //        iceResistance++;
-    //        fireResistance--;
-    //        waterResistance--;
-    //        lightningResistance -= 0.25f;
-    //    }
-
-    //    if (fireResistance < 0)
-    //    {
-    //        fireResistance = 0;
-    //    }
-    //    if (waterResistance < 0)
-    //    {
-    //        waterResistance = 0;
-    //    }
-    //    if (iceResistance < 0)
-    //    {
-    //        iceResistance = 0;
-    //    }
-    //    if (lightningResistance < 0)
-    //    {
-    //        lightningResistance = 0;
-    //    }
-    //}
 }
   
