@@ -752,11 +752,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145d275b466a0514a8f352c06babba71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isImmuneToDamage: 0
   currentState: 
   path: {fileID: 0}
   healthBar: {fileID: 102982205}
-  explosion: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
+  explosion: {fileID: 8460667080445658512, guid: a3e2c3406e02f2c4ba86cfb1604277bd, type: 3}
 --- !u!114 &2711310939994224304
 MonoBehaviour:
   m_ObjectHideFlags: 0

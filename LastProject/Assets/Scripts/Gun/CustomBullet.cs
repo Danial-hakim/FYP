@@ -32,9 +32,9 @@ public class CustomBullet : MonoBehaviour
 
     //Damage
     public int explosionDamage;
-    public float explosionRange;
+    float explosionRange;
     public float explosionForce;
-    public float damage;
+    float damage;
 
     //Lifetime
     public int maxCollisions;
@@ -47,6 +47,9 @@ public class CustomBullet : MonoBehaviour
     //Element Color
     Color currentColor;
     ElementType currentElement;
+
+    bool triggerStatusAilment = true;
+    float statusAilmentDuration = 2.0f;
 
     private void Start()
     {
@@ -123,6 +126,9 @@ public class CustomBullet : MonoBehaviour
 
         //Set gravity
         rb.useGravity = useGravity;
+
+        //Stats 
+        damage = 10;
     }
 
     /// Just to visualize the explosion range
@@ -132,36 +138,25 @@ public class CustomBullet : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
 
-    private void CheckElement(Enemy enemy) 
+    private Dictionary<ElementType, System.Action<Enemy>> elementEffects = new Dictionary<ElementType, System.Action<Enemy>>()
     {
-       switch(currentElement) 
-       {
-            case ElementType.Fire:
-                if(!enemy.onFire)
-                {
-                    enemy.onFire = true;
-                }
-                break;
-            case ElementType.Water:
-                if(!enemy.beingSlowed)
-                {
-                    enemy.beingSlowed = true;
-                }
-                break;
-            case ElementType.Ice:
-                if (!enemy.currentlyFrozen)
-                {
-                    enemy.currentlyFrozen = true;
-                }
-                Debug.Log("ice function");
-                break;
-            case ElementType.Lightning:
-                Debug.Log("lightning function");
-                break;
-            default:
-                Debug.Log("None");
-                break;
-       };
+        { ElementType.Fire, (enemy) => enemy.onFire = true },
+        { ElementType.Water, (enemy) => enemy.beingSlowed = true },
+        { ElementType.Ice, (enemy) => enemy.currentlyFrozen = true },
+        { ElementType.Lightning, (enemy) => enemy.increaseLihgtningResistance() },
+    };
+
+    private void CheckElement(Enemy enemy)
+    {
+        System.Action<Enemy> effect;
+        if (elementEffects.TryGetValue(currentElement, out effect))
+        {
+            effect(enemy);
+        }
+        else
+        {
+            Debug.Log("None");
+        }
     }
 
     public void updateBulletElement()
