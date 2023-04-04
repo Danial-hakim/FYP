@@ -27,19 +27,24 @@ public class Enemy : MonoBehaviour
 
     //statusAilment
     public bool onFire { get; set; } = false;
-    float fireDuration = 5;
+    static float fireDuration = 5;
+    float startingFireDuration = 5;
 
     public bool beingSlowed { get; set; } = false;
-    float slowedDuration = 4;
+    static float slowedDuration = 4;
+    float startingSlowedDuration = 4;
 
     public bool currentlyFrozen { get; set; } = false;
-    float freezeDuration = 2;
+    static float freezeDuration = 2;
+    float startingFreezeDuration = 2;
 
+    static float damageReduction = 0;
+    float startingDamageReduction = 0;
     //Adaptive
-    static float fireResistance = 10.0f; // reduce the damage overtime
-    static float waterResistance = 10.0f; // reduce the slow reduction
-    static float iceResistance = 10.0f; // reduce the freeze duration 
-    static float lightningResistance = 10.0f; // reduce 
+    static float fireResistance = 0.0f; // reduce the damage overtime
+    static float waterResistance = 0.0f; // reduce the slow reduction
+    static float iceResistance = 0.0f; // reduce the freeze duration 
+    static float lightningResistance = 0.0f; // reduce the damage 
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +109,7 @@ public class Enemy : MonoBehaviour
     void Explode()
     {
         UpdateResistance();
+        UpdateStatusAilment();
         Instantiate(explosion,transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -123,9 +129,8 @@ public class Enemy : MonoBehaviour
         for(int i = 0; i < fireDuration;i++)
         {           
             yield return new WaitForSeconds(1f);
-            health -= 1;
+            health -= 5f;
         }
-
         onFire = false;
     }
 
@@ -151,11 +156,11 @@ public class Enemy : MonoBehaviour
     {
         if(lightningResistance < 70)
         {
-            lightningResistance += 0.25f;
+            lightningResistance += 1f;
         }
-        fireResistance++;
-        waterResistance--;
-        iceResistance--;
+        fireResistance -= 2f;
+        waterResistance -= 2f;
+        iceResistance -= 2f;
     }
 
     static Dictionary<string, float> resistances = new Dictionary<string, float>()
@@ -204,12 +209,35 @@ public class Enemy : MonoBehaviour
         waterResistance = resistances["Water"];
         iceResistance = resistances["Ice"];
         lightningResistance = resistances["Lightning"];
+    }
 
-        foreach (var mod in resistances)
-        {
-            Debug.Log(mod.Key + " : " + mod.Value);
-        }
+    void UpdateStatusAilment()
+    {
+        const float MAX_PERCENTAGE = 100f;
+        const float PERCENTAGE_MULTIPLIER = 0.01f;
 
+        float remainingPercentage = MAX_PERCENTAGE - fireResistance * PERCENTAGE_MULTIPLIER;
+
+        // Calculate the duration of the fire ailment based on the remaining percentage
+        fireDuration = RemainderCalculation(startingFireDuration,fireResistance);
+
+        // Calculate the duration of the slowed ailment based on the remaining percentage
+        slowedDuration = RemainderCalculation(startingSlowedDuration,waterResistance);
+
+        // Calculate the duration of the freeze ailment based on the remaining percentage
+        freezeDuration = RemainderCalculation(startingFreezeDuration,iceResistance);
+
+        // TODO: Calculate the damage reduction based on the remaining percentage
+        // damageReduction = damageReduction * remainingPercentage;
+        Debug.Log(slowedDuration);
+    }
+
+    float RemainderCalculation(float startingDuration, float resistanceType)
+    {
+        const float MAX_PERCENTAGE = 100f;
+        const float PERCENTAGE_MULTIPLIER = 0.01f;
+
+        return startingDuration * ((MAX_PERCENTAGE - resistanceType) * PERCENTAGE_MULTIPLIER);
     }
 }
   

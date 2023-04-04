@@ -64,13 +64,12 @@ public class RoomSpawner : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
+		Debug.Log("Test");
 		if (other.CompareTag("SpawnPoint"))
 		{
-            Debug.Log("taken");
 			Debug.Log(other.tag);
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
 			{
-				Debug.Log("stack");
 				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
 				Destroy(gameObject);
 			}

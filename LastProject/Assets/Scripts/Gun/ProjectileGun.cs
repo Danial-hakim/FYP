@@ -4,6 +4,14 @@ using TMPro;
 
 public class ProjectileGun : MonoBehaviour
 {
+    public enum GunType
+    {
+        Shotgun,
+        Assault,
+        Burst,
+    }
+    GunType currentType;
+
     //bullet 
     public GameObject bullet;
     Renderer bulletRenderer;
@@ -35,12 +43,12 @@ public class ProjectileGun : MonoBehaviour
 
     //bug fixing :D
     public bool allowInvoke = true;
-
     private void Awake()
     {
         //make sure magazine is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        currentType = GunType.Assault;
     }
 
     private void Update()
@@ -171,5 +179,12 @@ public class ProjectileGun : MonoBehaviour
     public void UpdateReloadTime(float reloadTime)
     {
         this.reloadTime = reloadTime;
+    }
+
+    public void UpdateGunType(GunType newType)
+    {
+        currentType = newType;
+
+        Debug.Log(newType.ToString());
     }
 }

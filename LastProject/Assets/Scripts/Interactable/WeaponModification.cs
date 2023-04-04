@@ -12,6 +12,8 @@ public class WeaponModification : Interactable
     [SerializeField] float timeBetweenShot;
     [SerializeField] float timeBetweenShooting;
 
+    [SerializeField] ProjectileGun.GunType gunType;
+
     void Start()
     {
         
@@ -27,5 +29,6 @@ public class WeaponModification : Interactable
     {
         ProjectileGun gun = GameObject.FindGameObjectWithTag("Gun").GetComponent<ProjectileGun>();
         gun.UpdateGunModification(shootForce,upwardForce,spread,bulletPerTap,allowButtonHold,timeBetweenShot,timeBetweenShooting);
+        gun.UpdateGunType(gunType);
     }
 }
