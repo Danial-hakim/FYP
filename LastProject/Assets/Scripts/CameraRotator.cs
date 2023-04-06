@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    public float rotationSpeed = 10.0f;
-
+    public GameObject magnifier;
+    public float lerpSpeed = 5f;
+    float yRotation;
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if ( magnifier != null ) 
+        { 
+            Quaternion curRotation = transform.rotation;
+            getRotation(magnifier.transform.position.x);
+            gameObject.transform.rotation = Quaternion.Lerp(transform.rotation, 
+                new Quaternion(0, yRotation, 0, curRotation.w), 
+                lerpSpeed * Time.deltaTime); 
+        }
+    }
 
-        transform.Rotate(new Vector3(-vertical * rotationSpeed * Time.deltaTime, horizontal * rotationSpeed * Time.deltaTime, 0));
+    void getRotation(float axisValue)
+    {
+        yRotation = axisValue * 22.5f;
     }
 }

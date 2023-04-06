@@ -8,33 +8,6 @@ using UnityEngine.InputSystem.HID;
 
 public class MagniferMover : MonoBehaviour
 {
-    //public float speed = 10.0f;
-    //public Transform playerCamera;
-
-    //void Update()
-    //{
-    //    float horizontal = Input.GetAxis("Horizontal");
-    //    float vertical = Input.GetAxis("Vertical");
-
-    //    // Get the camera's local right, up, and forward vectors
-    //    Vector3 right = playerCamera.right;
-    //    Vector3 up = playerCamera.up;
-    //    Vector3 forward = playerCamera.forward;
-
-    //    // Project the forward vector onto the XZ plane
-    //    forward.y = 0;
-
-    //    // Normalize the vectors
-    //    right.Normalize();
-    //    up.Normalize();
-    //    forward.Normalize();
-
-    //    // Calculate the movement vector based on the input and camera orientation
-    //    Vector3 movement = (horizontal * right + vertical * forward) * speed * Time.deltaTime;
-
-    //    // Move the magnifier along with the camera
-    //    transform.position += movement;
-    //}
     [SerializeField] GameObject player;
     private EyeTracker eyeTracker;
     private Calibration calibrationObject;
@@ -42,17 +15,20 @@ public class MagniferMover : MonoBehaviour
     private Camera cam;
     private float distance = 2f;
     public float lerpSpeed = 5f;
+
+    private Camera magnifierCam;
+
+    Quaternion yRotation;
     private void Start()
     {
         eyeTracker = EyeTracker.Instance;
         calibrationObject = Calibration.Instance;
         cam = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLook>().cam;
-        //tempBall = transform.GetChild(0).gameObject;
+        magnifierCam = transform.GetChild(0).GetComponent<Camera>();
     }
-
     private void LateUpdate()
     {
-        
+
     }
     private void FixedUpdate()
     {
@@ -68,10 +44,7 @@ public class MagniferMover : MonoBehaviour
         {
             Vector3 targetPosition = ray.GetPoint(distance);
             transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
-        }
-        else
-        {
-            Debug.Log("Get ray is false");
+            //updateCameraRotation();
         }
     }
 
@@ -80,6 +53,24 @@ public class MagniferMover : MonoBehaviour
         var data = eyeTracker.LatestGazeData;
         ray = data.CombinedGazeRayScreen;
         return data.CombinedGazeRayScreenValid;
+    }
+
+    void updateCameraRotation()
+    {
+        Quaternion curRotation = magnifierCam.gameObject.transform.rotation;
+        Vector3 targetPosition = transform.position;
+        Vector3 forwardDirection = (targetPosition - player.transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, Vector3.up);
+
+        getRotation(transform.position.x);
+
+        magnifierCam.gameObject.transform.rotation = Quaternion.Lerp(curRotation, yRotation, 1f);
+
+        Debug.Log(magnifierCam.transform.rotation.y.ToString());
+    }
+    void getRotation(float axisValue)
+    {
+        yRotation = Quaternion.Euler(0f, axisValue * 22.5f, 0f);
     }
 
 }
