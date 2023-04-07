@@ -33,6 +33,7 @@ public class MagniferMover : MonoBehaviour
     private void FixedUpdate()
     {
         shootRay();
+        updateCameraRotation();
     }
     private void shootRay()
     {
@@ -44,7 +45,6 @@ public class MagniferMover : MonoBehaviour
         {
             Vector3 targetPosition = ray.GetPoint(distance);
             transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
-            //updateCameraRotation();
         }
     }
 
@@ -57,20 +57,14 @@ public class MagniferMover : MonoBehaviour
 
     void updateCameraRotation()
     {
-        Quaternion curRotation = magnifierCam.gameObject.transform.rotation;
-        Vector3 targetPosition = transform.position;
-        Vector3 forwardDirection = (targetPosition - player.transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, Vector3.up);
-
+        Quaternion curRotation = magnifierCam.transform.localRotation;
         getRotation(transform.position.x);
 
-        magnifierCam.gameObject.transform.rotation = Quaternion.Lerp(curRotation, yRotation, 1f);
-
-        Debug.Log(magnifierCam.transform.rotation.y.ToString());
+        magnifierCam.transform.localRotation = Quaternion.Lerp(curRotation, yRotation, 1f);
     }
     void getRotation(float axisValue)
     {
-        yRotation = Quaternion.Euler(0f, axisValue * 22.5f, 0f);
+        yRotation = Quaternion.Euler(0f, -axisValue * 22.5f, 0f);
     }
 
 }
