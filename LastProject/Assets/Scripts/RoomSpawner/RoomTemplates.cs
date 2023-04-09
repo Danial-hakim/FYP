@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomTemplates : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class RoomTemplates : MonoBehaviour
 
 	public List<GameObject> rooms;
 
-	public float waitTime;
+	public float waitTime = 10;
 	private bool spawnedBoss;
 	public GameObject boss;
 
+	public NavMeshSurface[] navMeshSurface;
 	void Update()
 	{
 		if (waitTime <= 0 && spawnedBoss == false)
@@ -25,7 +27,7 @@ public class RoomTemplates : MonoBehaviour
 			{
 				if (i == rooms.Count - 1)
 				{
-					//Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+					buildMeshNow();
 					spawnedBoss = true;
 				}
 			}
@@ -37,4 +39,16 @@ public class RoomTemplates : MonoBehaviour
 
 		if(waitTime <= 0) { waitTime = 0; }
 	}
+
+	void buildMeshNow()
+	{
+        navMeshSurface = new NavMeshSurface[rooms.Count];
+        for (int i = 0; i < rooms.Count; i++)
+		{
+			////Debug.Log(rooms[i].name);
+			////navMeshSurface[i] = rooms[i].GetComponent<NavMeshSurface>();
+            rooms[i].GetComponent<NavMeshSurface>().BuildNavMesh();
+		}
+		Debug.Log("BUILD DONE");
+    }
 }
