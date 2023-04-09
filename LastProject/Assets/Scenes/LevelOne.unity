@@ -468,17 +468,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1099114814354124292, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5632446563797049014, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
       propertyPath: m_Name
       value: Entry Room
-      objectReference: {fileID: 0}
-    - target: {fileID: 5632446563797049014, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5632446563797049015, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
       propertyPath: m_RootOrder
@@ -524,5 +516,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5632446564368935874, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: enemyGameobject
+      value: 
+      objectReference: {fileID: 2711310939994224462, guid: 8f008a11439ddf7498c0e46074ebec9a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}

@@ -21,8 +21,8 @@ public class MagniferMover : MonoBehaviour
     Quaternion yRotation;
     private void Start()
     {
-        eyeTracker = EyeTracker.Instance;
-        calibrationObject = Calibration.Instance;
+        //eyeTracker = EyeTracker.Instance;
+        //calibrationObject = Calibration.Instance;
         cam = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLook>().cam;
         magnifierCam = transform.GetChild(0).GetComponent<Camera>();
     }
@@ -32,7 +32,7 @@ public class MagniferMover : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        shootRay();
+        //shootRay();
         updateCameraRotation();
     }
     private void shootRay()
@@ -58,13 +58,13 @@ public class MagniferMover : MonoBehaviour
     void updateCameraRotation()
     {
         Quaternion curRotation = magnifierCam.transform.localRotation;
-        getRotation(transform.position.x);
+        getRotation(new Vector2(transform.position.x, transform.position.y));
 
         magnifierCam.transform.localRotation = Quaternion.Lerp(curRotation, yRotation, 1f);
     }
-    void getRotation(float axisValue)
+    void getRotation(Vector2 axisValue)
     {
-        yRotation = Quaternion.Euler(0f, -axisValue * 22.5f, 0f);
+        yRotation = Quaternion.Euler(0f, -axisValue.x * 22.5f, 0f);
     }
 
 }
