@@ -19,21 +19,25 @@ public class MagniferMover : MonoBehaviour
     private Camera magnifierCam;
 
     Quaternion yRotation;
+
+    float startingVal;
     private void Start()
     {
-        //eyeTracker = EyeTracker.Instance;
-        //calibrationObject = Calibration.Instance;
+        eyeTracker = EyeTracker.Instance;
+        calibrationObject = Calibration.Instance;
         cam = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLook>().cam;
         magnifierCam = transform.GetChild(0).GetComponent<Camera>();
-    }
-    private void LateUpdate()
-    {
 
+        startingVal = eyeTracker.LatestGazeData.Left.PupilDiameter;
+    }
+    private void Update()
+    {
+        UpdateZoomLevel();
     }
     private void FixedUpdate()
     {
         //shootRay();
-        updateCameraRotation();
+        //updateCameraRotation();
     }
     private void shootRay()
     {
@@ -67,4 +71,21 @@ public class MagniferMover : MonoBehaviour
         yRotation = Quaternion.Euler(0f, -axisValue.x * 22.5f, 0f);
     }
 
+    void UpdateZoomLevel()
+    {
+        bool leftEyeOpen = eyeTracker.LatestGazeData.Left.PupilDiameterValid;
+        bool rightEyeOpen = eyeTracker.LatestGazeData.Right.PupilDiameterValid;
+        if (!leftEyeOpen)
+        {
+            magnifierCam.fieldOfView = 4;
+        }
+        else if (!rightEyeOpen)
+        {
+            magnifierCam.fieldOfView = 12;
+        }
+        else
+        {
+            magnifierCam.fieldOfView = 8;
+        }
+    }
 }
