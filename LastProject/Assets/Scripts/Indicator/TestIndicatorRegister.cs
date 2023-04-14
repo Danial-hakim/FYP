@@ -9,7 +9,7 @@ public class TestIndicatorRegister : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Register", 0);
+        //Invoke("Register", 0);
     }
 
     // Update is called once per frame

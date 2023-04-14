@@ -45,10 +45,11 @@ public class RoomTemplates : MonoBehaviour
         navMeshSurface = new NavMeshSurface[rooms.Count];
         for (int i = 0; i < rooms.Count; i++)
 		{
-			////Debug.Log(rooms[i].name);
-			////navMeshSurface[i] = rooms[i].GetComponent<NavMeshSurface>();
             rooms[i].GetComponent<NavMeshSurface>().BuildNavMesh();
 		}
-		rooms[0].GetComponent<EntitySpawner>().SpawnEnemies();
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            //rooms[i].GetComponent<EntitySpawner>().SpawnEnemies();
+        }       
     }
 }
