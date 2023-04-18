@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 5491324448361863608}
   - component: {fileID: -2090028409587451935}
   - component: {fileID: -2462689835385829884}
-  - component: {fileID: 1526361953282452673}
+  - component: {fileID: -2184931229716027998}
   m_Layer: 0
   m_Name: BR
   m_TagString: Untagged
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &1526361953282452673
+--- !u!114 &-2184931229716027998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,8 +636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e25ba2aca37a04d868de55592592c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyGameobject: {fileID: 2711310939994224462, guid: 8f008a11439ddf7498c0e46074ebec9a, type: 3}
-  playerGameobject: {fileID: 6212935287315178229, guid: a28073fe27f7cc04c9b4627dafb0b1f7, type: 3}
+  enemy: {fileID: 2711310939994224462, guid: 8f008a11439ddf7498c0e46074ebec9a, type: 3}
+  player: {fileID: 6212935287315178229, guid: a28073fe27f7cc04c9b4627dafb0b1f7, type: 3}
   bulletElemets:
   - {fileID: 1550505256072299966, guid: 3600dae4554f33a4eb271702eec49c8f, type: 3}
   - {fileID: 1795688875814816323, guid: f7b962bcb77855d4589e603460504b2c, type: 3}
@@ -647,6 +647,7 @@ MonoBehaviour:
   - {fileID: 7272553208497892694, guid: 8d18dacbba64ea446bf04951e1d9a845, type: 3}
   - {fileID: 4791500337591272292, guid: 0ba31ad05e0b2994aab02b874afc3432, type: 3}
   - {fileID: 6533612505412257004, guid: 62e56c15f9cb18249991997ef8f6f535, type: 3}
+  healZone: {fileID: 8291296532567729342, guid: f2929656585f15741a00ad1b9d283ac7, type: 3}
 --- !u!1 &5491324448374399866
 GameObject:
   m_ObjectHideFlags: 0

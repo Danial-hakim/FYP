@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class EntitySpawner : MonoBehaviour
 {
-    [SerializeField]GameObject enemyGameobject;
-    [SerializeField]GameObject playerGameobject;
+    [SerializeField]GameObject enemy;
+    [SerializeField]GameObject player;
 
     [SerializeField]GameObject[] bulletElemets;
     [SerializeField]GameObject[] gunModification;
+    [SerializeField]GameObject healZone;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class EntitySpawner : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             Vector3 spawnPosition = centerPosition + new Vector3((i - 1) * spacing, 0, 0);
-            Instantiate(enemyGameobject, spawnPosition, Quaternion.identity, transform);
+            Instantiate(enemy, spawnPosition, Quaternion.identity, transform);
         }
     }
 
@@ -38,9 +39,8 @@ public class EntitySpawner : MonoBehaviour
     {
         Vector3 centerPosition = transform.position;
 
-        Instantiate(playerGameobject, centerPosition, Quaternion.identity);
+        Instantiate(player, centerPosition, Quaternion.identity);
     }
-
 
     public void SpawnBulletElements()
     {
@@ -56,5 +56,12 @@ public class EntitySpawner : MonoBehaviour
         Vector3 centerPosition = transform.position + new Vector3(spacing, -1f, 0);
         int rand = Random.Range(0, gunModification.Length);
         Instantiate(gunModification[rand], centerPosition, Quaternion.identity, transform);
+    }
+
+    public void SpawnHealZone()
+    {
+        float cornerCorrection = 7f;
+        Vector3 centerPosition = transform.position + new Vector3(cornerCorrection, -1f, cornerCorrection);
+        Instantiate(healZone, centerPosition, Quaternion.identity, transform);
     }
 }

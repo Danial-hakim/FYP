@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     private string currentState;
     public Path path;
 
-    float health = 100;
+    public float health { get; private set; } = 100;
     public Slider healthBar;
 
     public GameObject explosion;
@@ -46,6 +46,9 @@ public class Enemy : MonoBehaviour
     static float iceResistance = 0.0f; // reduce the freeze duration 
     static float lightningResistance = 0.0f; // reduce the damage 
 
+    public Vector3 healZonePosition { get; private set; }
+
+    bool healing;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,10 @@ public class Enemy : MonoBehaviour
             // Save the original color of the game object
             originalColor = renderer.material.color;
         }
+
+        healZonePosition = transform.parent.Find("HealZone(Clone)").position;
+
+        Debug.Log(healZonePosition);
     }
 
     // Update is called once per frame
@@ -221,16 +228,16 @@ public class Enemy : MonoBehaviour
         float remainingPercentage = MAX_PERCENTAGE - fireResistance * PERCENTAGE_MULTIPLIER;
 
         // Calculate the duration of the fire ailment based on the remaining percentage
-        //fireDuration = RemainderCalculation(startingFireDuration,fireResistance);
+        fireDuration = RemainderCalculation(startingFireDuration,fireResistance);
 
         // Calculate the duration of the slowed ailment based on the remaining percentage
-        //slowedDuration = RemainderCalculation(startingSlowedDuration,waterResistance);
+        slowedDuration = RemainderCalculation(startingSlowedDuration,waterResistance);
 
         // Calculate the duration of the freeze ailment based on the remaining percentage
-        //freezeDuration = RemainderCalculation(startingFreezeDuration,iceResistance);
+        freezeDuration = RemainderCalculation(startingFreezeDuration,iceResistance);
 
         // TODO: Calculate the damage reduction based on the remaining percentage
-        // damageReduction = damageReduction * remainingPercentage;
+        damageReduction = damageReduction * remainingPercentage;
         Debug.Log(slowedDuration);
     }
 
@@ -247,6 +254,32 @@ public class Enemy : MonoBehaviour
         if(renderer != null)
         {
             renderer.material.color = color;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "HealZone(Clone)")
+        {
+            StartCoroutine("Heal");
+        }
+    }
+    
+    IEnumerator Heal()
+    {
+        for(float currentHealh = health; currentHealh < 100; currentHealh += 1f)
+        {
+            health = currentHealh;
+            Debug.Log(health);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "HealZone(Clone)")
+        {
+            StopCoroutine("Heal");
         }
     }
 }

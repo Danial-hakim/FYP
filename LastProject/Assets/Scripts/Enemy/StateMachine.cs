@@ -7,12 +7,14 @@ public class StateMachine : MonoBehaviour
     public BaseState activeState;
     public PatrolState patrolState;
     public ChaseState chaseState;
+    public RetreatState retreatState;
 
     //private bool playerIsFound;
     public void Initialise()
     {
         chaseState = new ChaseState();
         patrolState = new PatrolState();
+        retreatState = new RetreatState();
         ChangeState(patrolState);
     }
     // Start is called before the first frame update
@@ -28,14 +30,22 @@ public class StateMachine : MonoBehaviour
         {
             activeState.Perform();
         }
-        //if (transform.GetComponent<FieldOfView>().canSeePlayer)
-        //{
-        //    ChangeState(chaseState);
-        //}
-        //else
-        //{
-        //    ChangeState(patrolState);
-        //}
+        if (transform.GetComponent<FieldOfView>().canSeePlayer)
+        {
+            ChangeState(chaseState);
+        }
+        else if(transform.GetComponent<Enemy>().health < 50)
+        {
+            ChangeState(retreatState);
+            if(transform.GetComponent<Enemy>().health == 100)
+            {
+                ChangeState(chaseState);
+            }
+        }
+        else
+        {
+            ChangeState(patrolState);
+        }
     }
 
     public void ChangeState(BaseState newState)

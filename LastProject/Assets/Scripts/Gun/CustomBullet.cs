@@ -153,10 +153,6 @@ public class CustomBullet : MonoBehaviour
         {
             effect(enemy);
         }
-        else
-        {
-            Debug.Log("None");
-        }
     }
 
     public void updateBulletElement()
