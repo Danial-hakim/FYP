@@ -270,7 +270,6 @@ public class Enemy : MonoBehaviour
         for(float currentHealh = health; currentHealh < 100; currentHealh += 1f)
         {
             health = currentHealh;
-            Debug.Log(health);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
