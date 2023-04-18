@@ -62,18 +62,18 @@ public class RoomSpawner : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		Debug.Log("Test");
-		if (other.CompareTag("SpawnPoint"))
-		{
-			Debug.Log(other.tag);
+    private void OnTriggerEnter(Collider other)
+    {
+        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+    
+        if (other.CompareTag("SpawnPoint"))
+        {
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
-			{
-				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-				Destroy(gameObject);
-			}
-			spawned = true;
-		}
-	}
+            {
+                Instantiate(templates.closedRoom, transform.position, templates.closedRoom.transform.rotation);
+                Destroy(gameObject);
+            }
+            spawned = true;
+        }
+    }
 }

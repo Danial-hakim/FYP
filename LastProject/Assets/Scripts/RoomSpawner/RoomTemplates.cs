@@ -17,8 +17,6 @@ public class RoomTemplates : MonoBehaviour
 	public float waitTime = 10;
 	private bool builtNavMesh;
 	public GameObject boss;
-
-	public NavMeshSurface[] navMeshSurface;
 	void Update()
 	{
 		if (waitTime <= 0 && builtNavMesh == false)
@@ -42,14 +40,19 @@ public class RoomTemplates : MonoBehaviour
 
 	void buildMeshNow()
 	{
-        navMeshSurface = new NavMeshSurface[rooms.Count];
         for (int i = 0; i < rooms.Count; i++)
 		{
             rooms[i].GetComponent<NavMeshSurface>().BuildNavMesh();
 		}
-        for (int i = 0; i < rooms.Count; i++)
+		rooms[0].GetComponent<EntitySpawner>().SpawnPlayer();
+        for (int i = 1; i < rooms.Count; i++)
         {
-            //rooms[i].GetComponent<EntitySpawner>().SpawnEnemies();
-        }       
+            rooms[i].GetComponent<EntitySpawner>().SpawnEnemies();
+        }
+        for (int i = 1; i < rooms.Count; i++)
+        {
+            rooms[i].GetComponent<EntitySpawner>().SpawnBulletElements();
+            //rooms[i].GetComponent<EntitySpawner>().SpawnGunModification();
+        }
     }
 }

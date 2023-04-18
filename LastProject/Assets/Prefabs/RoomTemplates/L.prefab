@@ -1053,7 +1053,7 @@ MonoBehaviour:
   - {fileID: 3771216355266725706}
   - {fileID: 7804969840848495392}
   - {fileID: 3072102411635481290}
-  alwaysDrawPath: 1
+  alwaysDrawPath: 0
   drawAsLoop: 1
   drawNumbers: 1
   debugColour: {r: 1, g: 0, b: 0, a: 1}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819752711}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GunContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,8 @@ GameObject:
   - component: {fileID: 2103827967}
   - component: {fileID: 2103827970}
   - component: {fileID: 2103827971}
-  m_Layer: 0
+  - component: {fileID: 24528004}
+  m_Layer: 10
   m_Name: Magnifier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,8 +62,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103827965}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2123514536}
@@ -128,7 +129,7 @@ MeshCollider:
   m_GameObject: {fileID: 2103827965}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -145,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c49782593a42ae4c88cab2d254db32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  playerCamera: {fileID: 3153601289386953195}
+  player: {fileID: 6212935287315178229}
+  lerpSpeed: 5
 --- !u!54 &2103827971
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,6 +164,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &24528004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103827965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500f7098a6ab0a14f9d258551f68f742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _subscribeToGaze: 1
+  _connectToFirst: 1
+  _eyeTrackerSerialStart: IS
 --- !u!1 &2123514535
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +191,7 @@ GameObject:
   - component: {fileID: 2123514538}
   - component: {fileID: 2123514537}
   - component: {fileID: 2123514539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +208,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2103827966}
   m_RootOrder: 0
@@ -224,7 +240,7 @@ Camera:
   far clip plane: 1000
   field of view: 8
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 1.47
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -260,7 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bca559987c3e7d4383edbddcd2d86a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 225
+  magnifier: {fileID: 2103827965}
+  lerpSpeed: 5
 --- !u!1 &3153601289386953198
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +289,7 @@ GameObject:
   - component: {fileID: 3153601289386953195}
   - component: {fileID: 3153601289386953196}
   - component: {fileID: 3153601289386953197}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -321,7 +338,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 67
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -365,7 +382,8 @@ GameObject:
   - component: {fileID: 1997229223}
   - component: {fileID: 1997229224}
   - component: {fileID: 3153601290046973100}
-  m_Layer: 0
+  - component: {fileID: 24528014}
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -480,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fade5114faffc246b8d40289d6909bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   gravity: -9.8
   jumpHeight: 1.5
 --- !u!114 &1997229222
@@ -521,7 +539,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6212935287315178229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 060895578bedeb449a24274fe718da8d, type: 3}
   m_Name: 
@@ -543,6 +561,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &24528014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6212935287315178229}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7974248e5dba84ca11d4ad0d4e31d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbar: {fileID: 0}
 --- !u!1001 &7317283516919250019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -554,10 +585,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: AssaultRifle
       objectReference: {fileID: 0}
+    - target: {fileID: 6475712030088240489, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: m_TagString
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475712030088240495, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 3153601289386953196}
+    - target: {fileID: 6475712030088240495, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: playerRb
+      value: 
+      objectReference: {fileID: 3153601290046973100}
+    - target: {fileID: 6475712030088240495, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: shootForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475712030088240495, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475712030807237223, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 3153601289386953195}
+    - target: {fileID: 6475712030807237223, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 7286938117881206732}
     - target: {fileID: 6475712030807237223, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
       propertyPath: equipped
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6475712030807237223, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
+      propertyPath: gunContainer
+      value: 
+      objectReference: {fileID: 819752711}
     - target: {fileID: 6797304805706126638, guid: 2eee69cfc2394864589022665b8d018d, type: 3}
       propertyPath: m_RootOrder
       value: 0

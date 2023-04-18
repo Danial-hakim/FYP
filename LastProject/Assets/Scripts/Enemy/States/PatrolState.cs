@@ -23,7 +23,7 @@ public class PatrolState : BaseState
 
     void PatrolCycle()
     {
-        if (enemy.Agent.remainingDistance < 0.2f)
+        if (enemy.Agent.remainingDistance < 1.5f)
         {
             waitTimer += Time.deltaTime;
             if (waitTimer > 2)
