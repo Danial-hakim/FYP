@@ -7,6 +7,7 @@ public class ChaseState : BaseState
     public override void Enter()
     {
         enemy.Agent.speed = 7;
+        enemy.setColor(Color.red);
     }
 
     public override void Perform()

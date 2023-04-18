@@ -10,6 +10,7 @@ public class PatrolState : BaseState
     public override void Enter()
     {
         enemy.Agent.speed = 3;
+        enemy.setColor(Color.black);
     }
 
     public override void Perform()

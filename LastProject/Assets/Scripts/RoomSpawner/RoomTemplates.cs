@@ -48,11 +48,8 @@ public class RoomTemplates : MonoBehaviour
         for (int i = 1; i < rooms.Count; i++)
         {
             rooms[i].GetComponent<EntitySpawner>().SpawnEnemies();
-        }
-        for (int i = 1; i < rooms.Count; i++)
-        {
-            rooms[i].GetComponent<EntitySpawner>().SpawnBulletElements();
-            //rooms[i].GetComponent<EntitySpawner>().SpawnGunModification();
-        }
+			rooms[i].GetComponent<EntitySpawner>().SpawnBulletElements();
+			rooms[i].GetComponent<EntitySpawner>().SpawnGunModification();
+		}
     }
 }

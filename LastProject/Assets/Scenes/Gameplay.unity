@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,6 +228,14 @@ PrefabInstance:
       propertyPath: promptText
       value: 
       objectReference: {fileID: 710594174}
+    - target: {fileID: 1797846162455850345, guid: a28073fe27f7cc04c9b4627dafb0b1f7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797846162455850345, guid: a28073fe27f7cc04c9b4627dafb0b1f7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4346659044713881868, guid: a28073fe27f7cc04c9b4627dafb0b1f7, type: 3}
       propertyPath: ammunitionDisplay
       value: 
@@ -4308,19 +4316,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 345163013, guid: 458a50c4ba77cde46971fff545f19035, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345163013, guid: 458a50c4ba77cde46971fff545f19035, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 646681701735125072, guid: 458a50c4ba77cde46971fff545f19035, type: 3}
       propertyPath: m_Name
-      value: 'Canvas '
+      value: PlayerCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 646681701735125072, guid: 458a50c4ba77cde46971fff545f19035, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 646681701735125100, guid: 458a50c4ba77cde46971fff545f19035, type: 3}
       propertyPath: m_Pivot.x

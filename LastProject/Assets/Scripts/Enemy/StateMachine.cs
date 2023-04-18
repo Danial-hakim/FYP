@@ -8,12 +8,11 @@ public class StateMachine : MonoBehaviour
     public PatrolState patrolState;
     public ChaseState chaseState;
 
-    private bool playerIsFound;
+    //private bool playerIsFound;
     public void Initialise()
     {
         chaseState = new ChaseState();
         patrolState = new PatrolState();
-        //playerIsFound = GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer;
         ChangeState(patrolState);
     }
     // Start is called before the first frame update
@@ -29,10 +28,9 @@ public class StateMachine : MonoBehaviour
         {
             activeState.Perform();
         }
-        //if(GameObject.FindGameObjectWithTag("Enemy").GetComponent<FieldOfView>().canSeePlayer)
+        //if (transform.GetComponent<FieldOfView>().canSeePlayer)
         //{
-        //    Debug.Log("Chase");
-        //    //ChangeState(chaseState);
+        //    ChangeState(chaseState);
         //}
         //else
         //{

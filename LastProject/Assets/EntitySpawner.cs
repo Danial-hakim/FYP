@@ -8,7 +8,7 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField]GameObject enemyGameobject;
     [SerializeField]GameObject playerGameobject;
 
-    [SerializeField]GameObject bulletElemets;
+    [SerializeField]GameObject[] bulletElemets;
     [SerializeField]GameObject[] gunModification;
     // Start is called before the first frame update
     void Start()
@@ -44,15 +44,16 @@ public class EntitySpawner : MonoBehaviour
 
     public void SpawnBulletElements()
     {
-        Debug.Log("SPAWN bullet");
-        //float spacing = 8.0f;
-        //Vector3 centerPosition = transform.position + new Vector3(spacing, 0, 0);
-        //Instantiate(bulletElemets, centerPosition, Quaternion.identity, transform);
+        float spacing = 6.0f;
+        int rand = Random.Range(0, gunModification.Length);
+        Vector3 centerPosition = transform.position + new Vector3(spacing, -1.5f, 0);
+        Instantiate(bulletElemets[rand], centerPosition, Quaternion.identity, transform);
     }
 
     public void SpawnGunModification()
     {
-        Vector3 centerPosition = transform.position;
+        float spacing = -6.0f;
+        Vector3 centerPosition = transform.position + new Vector3(spacing, -1f, 0);
         int rand = Random.Range(0, gunModification.Length);
         Instantiate(gunModification[rand], centerPosition, Quaternion.identity, transform);
     }

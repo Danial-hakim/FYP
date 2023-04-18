@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
     static float waterResistance = 0.0f; // reduce the slow reduction
     static float iceResistance = 0.0f; // reduce the freeze duration 
     static float lightningResistance = 0.0f; // reduce the damage 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -220,13 +221,13 @@ public class Enemy : MonoBehaviour
         float remainingPercentage = MAX_PERCENTAGE - fireResistance * PERCENTAGE_MULTIPLIER;
 
         // Calculate the duration of the fire ailment based on the remaining percentage
-        fireDuration = RemainderCalculation(startingFireDuration,fireResistance);
+        //fireDuration = RemainderCalculation(startingFireDuration,fireResistance);
 
         // Calculate the duration of the slowed ailment based on the remaining percentage
-        slowedDuration = RemainderCalculation(startingSlowedDuration,waterResistance);
+        //slowedDuration = RemainderCalculation(startingSlowedDuration,waterResistance);
 
         // Calculate the duration of the freeze ailment based on the remaining percentage
-        freezeDuration = RemainderCalculation(startingFreezeDuration,iceResistance);
+        //freezeDuration = RemainderCalculation(startingFreezeDuration,iceResistance);
 
         // TODO: Calculate the damage reduction based on the remaining percentage
         // damageReduction = damageReduction * remainingPercentage;
@@ -239,6 +240,14 @@ public class Enemy : MonoBehaviour
         const float PERCENTAGE_MULTIPLIER = 0.01f;
 
         return startingDuration * ((MAX_PERCENTAGE - resistanceType) * PERCENTAGE_MULTIPLIER);
+    }
+
+    public void setColor(Color color)
+    {       
+        if(renderer != null)
+        {
+            renderer.material.color = color;
+        }
     }
 }
   
