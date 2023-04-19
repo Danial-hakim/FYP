@@ -18,6 +18,8 @@ public class RoomTemplates : MonoBehaviour
 	public float waitTime = 10;
 	private bool builtNavMesh;
 	public GameObject boss;
+
+	int clearedRoomCounter;
 	void Update()
 	{
 		if (waitTime <= 0 && builtNavMesh == false)
@@ -37,6 +39,24 @@ public class RoomTemplates : MonoBehaviour
 		}
 
 		if(waitTime <= 0) { waitTime = 0; }
+
+		foreach(var room in rooms)
+		{
+			if(room.GetComponent<EntitySpawner>().cleared)
+			{
+				clearedRoomCounter++;
+			}
+			else
+			{
+				clearedRoomCounter = 0;
+				break;
+			}
+		}
+
+		if(clearedRoomCounter == rooms.Count)
+		{
+			Debug.Log("Spawn boss");
+		}
 	}
 
 	void buildMeshNow()
@@ -47,6 +67,7 @@ public class RoomTemplates : MonoBehaviour
             if (room == rooms[0])
 			{
 				room.GetComponent<EntitySpawner>().SpawnPlayer();
+				room.GetComponent<EntitySpawner>().cleared = true;
                 continue;
             }
 

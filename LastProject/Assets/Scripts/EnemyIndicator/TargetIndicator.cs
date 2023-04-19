@@ -36,7 +36,7 @@ public class TargetIndicator : MonoBehaviour
 
     private void Start()
     {
-        //player = GameObject.Find("Player").gameObject;
+        player = GameObject.Find("Player(Clone)").gameObject;
     }
 
     public void InitialiseTargetIndicator(GameObject target, Camera mainCamera, Canvas canvas)
@@ -50,7 +50,7 @@ public class TargetIndicator : MonoBehaviour
     {
         if(target != null)
         {
-            //checkDistance();
+            checkDistance();
             SetIndicatorPosition();
         }
         else
@@ -198,7 +198,6 @@ public class TargetIndicator : MonoBehaviour
             alphaVal = 1f / Mathf.Pow(2f, (0.1f * distance - 1f));
         }
 
-        Debug.Log(alphaVal);
         Color imageColor = TargetIndicatorImage.color;
         imageColor.a = alphaVal;
         TargetIndicatorImage.color = imageColor;

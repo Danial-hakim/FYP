@@ -37,7 +37,13 @@ public class MagniferMover : MonoBehaviour
     private void FixedUpdate()
     {
         //shootRay();
-        //updateCameraRotation();
+        updateCameraRotation();
+
+        //if(Input.GetKeyDown(KeyCode.J)) 
+        //{
+        //    Vector3 newPosition = transform.position + new Vector3(1f, 0f, 0f); // Calculate new position
+        //    transform.position = newPosition;
+        //}
     }
     private void shootRay()
     {

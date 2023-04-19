@@ -15,6 +15,7 @@ public class EntitySpawner : MonoBehaviour
 
     int counter;
     private int previousCount;
+    public bool cleared { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +30,12 @@ public class EntitySpawner : MonoBehaviour
             counter = CalculateRemainingEnemies();
             if (counter != previousCount)
             {
-                Debug.Log(gameObject.name + "Has " + counter + " Enemies left");
                 previousCount = counter;
             }
 
             if (counter == 0)
             {
-                Debug.Log("done");
+                cleared = true;
             }
         }   
     }

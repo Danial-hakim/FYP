@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Player : MonoBehaviour
 
     bool isActive = false;
     [SerializeField]GameObject magnifer;
+
+    [SerializeField]GameObject gameoverScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,22 +47,33 @@ public class Player : MonoBehaviour
             Damage();
        }
 
-       if(Input.GetKey(KeyCode.P))
+       if(Input.GetKeyUp(KeyCode.P))
        {
             HandleMagnifer();
        }
+
+        if (currentHealth <= 0 && Input.GetKeyUp(KeyCode.M))
+        {
+            AllowRestartScene();
+        }
     }
 
     void Damage()
     {
         currentHealth -= 10;
         healthbar.SetHealth(currentHealth);
+
+        if(currentHealth < 0)
+        {
+            gameoverScreen.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     void HandleMagnifer()
     {
         isActive = !isActive;
-        if(isActive)
+        if (isActive)
         {
             magnifer.SetActive(false);
         }
@@ -67,5 +81,19 @@ public class Player : MonoBehaviour
         {
             magnifer.SetActive(true);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy" && currentHealth > 0)
+        {
+            Damage();
+        }
+    }
+
+    void AllowRestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
     }
 }
