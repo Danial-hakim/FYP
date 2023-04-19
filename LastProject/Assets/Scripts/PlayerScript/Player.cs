@@ -10,6 +10,11 @@ public class Player : MonoBehaviour
     public HealthBar healthbar;
 
     UIController uiController;
+
+    Minimap minimap;
+
+    bool isActive = false;
+    [SerializeField]GameObject magnifer;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +30,10 @@ public class Player : MonoBehaviour
         if (uiController == null) Debug.LogError("No UIController component found");
 
         uiController.SetupIndicatorMaster();
+
+        minimap = GameObject.Find("MinimapCamera").GetComponent<Minimap>();
+
+        minimap.SetupMiniMap(this.gameObject);
     }
 
     // Update is called once per frame
@@ -34,11 +43,29 @@ public class Player : MonoBehaviour
        {
             Damage();
        }
+
+       if(Input.GetKey(KeyCode.P))
+       {
+            HandleMagnifer();
+       }
     }
 
     void Damage()
     {
         currentHealth -= 10;
         healthbar.SetHealth(currentHealth);
+    }
+
+    void HandleMagnifer()
+    {
+        isActive = !isActive;
+        if(isActive)
+        {
+            magnifer.SetActive(false);
+        }
+        else
+        {
+            magnifer.SetActive(true);
+        }
     }
 }

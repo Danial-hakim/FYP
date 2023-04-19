@@ -41,21 +41,26 @@ public class RoomTemplates : MonoBehaviour
 
 	void buildMeshNow()
 	{
-		for (int i = 1; i < rooms.Count; i++)
-		{
-            rooms[i].GetComponent<EntitySpawner>().SpawnWallLayouts();
-        }
-        for (int i = 0; i < rooms.Count; i++)
-		{
-            rooms[i].GetComponent<NavMeshSurface>().BuildNavMesh();
-		}
-		rooms[0].GetComponent<EntitySpawner>().SpawnPlayer();
-        for (int i = 1; i < rooms.Count; i++)
+        foreach (var room in rooms)
         {
-			rooms[i].GetComponent<EntitySpawner>().SpawnHealZone();
-			rooms[i].GetComponent<EntitySpawner>().SpawnEnemies();
-			rooms[i].GetComponent<EntitySpawner>().SpawnBulletElements();
-			rooms[i].GetComponent<EntitySpawner>().SpawnGunModification();
-		}
+            // Skip the first room (index 0)
+            if (room == rooms[0])
+			{
+				room.GetComponent<EntitySpawner>().SpawnPlayer();
+                continue;
+            }
+
+            // Spawn wall layouts for each room
+            room.GetComponent<EntitySpawner>().SpawnWallLayouts();
+
+            // Build navmesh for each room
+            room.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+            // Spawn heal zones, enemies, bullet elements, and gun modifications for each room
+            room.GetComponent<EntitySpawner>().SpawnHealZone();
+            room.GetComponent<EntitySpawner>().SpawnEnemies();
+            room.GetComponent<EntitySpawner>().SpawnBulletElements();
+            room.GetComponent<EntitySpawner>().SpawnGunModification();
+        }
     }
 }

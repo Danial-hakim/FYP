@@ -8,11 +8,7 @@ public class Minimap : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        }
-        else
+        if (player != null)
         {
             Vector3 newPosition = player.position;
             newPosition.y = transform.position.y;
@@ -22,5 +18,9 @@ public class Minimap : MonoBehaviour
         }
     }
 
+    public void SetupMiniMap(GameObject currentPlayer)
+    {
+        player = currentPlayer.GetComponent<Transform>();
+    }
 
 }

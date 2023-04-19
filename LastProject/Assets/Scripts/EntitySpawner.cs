@@ -63,16 +63,16 @@ public class EntitySpawner : MonoBehaviour
 
     public void SpawnBulletElements()
     {
-        float spacing = 6.0f;
+        float cornerCorrection = -7f;
         int rand = Random.Range(0, gunModification.Length);
-        Vector3 centerPosition = transform.position + new Vector3(spacing, -1.5f, 0);
+        Vector3 centerPosition = transform.position + new Vector3(cornerCorrection, -1f, cornerCorrection);
         Instantiate(bulletElemets[rand], centerPosition, Quaternion.identity, transform);
     }
 
     public void SpawnGunModification()
     {
-        float spacing = -6.0f;
-        Vector3 centerPosition = transform.position + new Vector3(spacing, -1f, 0);
+        float cornerCorrection = 7f;
+        Vector3 centerPosition = transform.position + new Vector3(-cornerCorrection, -0.875f, cornerCorrection);
         int rand = Random.Range(0, gunModification.Length);
         Instantiate(gunModification[rand], centerPosition, Quaternion.identity, transform);
     }
@@ -80,7 +80,7 @@ public class EntitySpawner : MonoBehaviour
     public void SpawnHealZone()
     {
         float cornerCorrection = 7f;
-        Vector3 centerPosition = transform.position + new Vector3(cornerCorrection, -1f, cornerCorrection);
+        Vector3 centerPosition = transform.position + new Vector3(cornerCorrection, 0f, cornerCorrection);
         Instantiate(healZone, centerPosition, Quaternion.identity, transform);
     }
 

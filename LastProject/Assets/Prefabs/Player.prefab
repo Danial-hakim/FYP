@@ -501,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   gravity: -9.8
-  jumpHeight: 1.5
+  jumpHeight: 1
 --- !u!114 &1997229222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,8 +515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 3153601289386953196}
-  xSensitivity: 30
-  ySensitivity: 30
+  xSensitivity: 20
+  ySensitivity: 20
 --- !u!114 &1997229223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 1797846163022730755}
+  magnifer: {fileID: 2103827965}
 --- !u!1001 &1797846162244905068
 PrefabInstance:
   m_ObjectHideFlags: 0
