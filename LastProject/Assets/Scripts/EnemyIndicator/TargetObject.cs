@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetObject : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         UIController ui = GetComponentInParent<UIController>();
         if(ui == null)
@@ -12,7 +12,7 @@ public class TargetObject : MonoBehaviour
             ui = GameObject.Find("IndicatorMaster").GetComponent<UIController>();
         }
 
-        if (ui == null) Debug.LogError("No UIController component found");
+        if (ui == null) Debug.Log("No UIController component found");
 
         ui.AddTargetIndicator(this.gameObject);
     }

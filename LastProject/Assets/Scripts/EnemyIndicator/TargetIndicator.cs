@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class TargetIndicator : MonoBehaviour
@@ -16,11 +17,27 @@ public class TargetIndicator : MonoBehaviour
 
     private RectTransform rectTransform;
 
+    UIController ui;
+
+    GameObject player;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+
+        ui = GetComponentInParent<UIController>();
+        if (ui == null)
+        {
+            ui = GameObject.Find("IndicatorMaster").GetComponent<UIController>();
+        }
+
+        if (ui == null) Debug.LogError("No UIController component found");
     }
 
+    private void Start()
+    {
+        //player = GameObject.Find("Player").gameObject;
+    }
 
     public void InitialiseTargetIndicator(GameObject target, Camera mainCamera, Canvas canvas)
     {
@@ -31,14 +48,14 @@ public class TargetIndicator : MonoBehaviour
 
     public void UpdateTargetIndicator()
     {
-        if(target != null && gameObject != null)
+        if(target != null)
         {
+            //checkDistance();
             SetIndicatorPosition();
         }
         else
         {
-
-            Destroy(gameObject);
+            ui.RemoveTargetIndicator(this.gameObject);
         }
 
         //Adjust distance display
@@ -125,8 +142,6 @@ public class TargetIndicator : MonoBehaviour
         return indicatorPosition;
     }
 
-
-
     private void targetOutOfSight(bool oos, Vector3 indicatorPosition)
     {
         //In Case the indicator is OutOfSight
@@ -155,7 +170,6 @@ public class TargetIndicator : MonoBehaviour
         }
     }
 
-
     private Vector3 rotationOutOfSightTargetindicator(Vector3 indicatorPosition)
     {
         //Calculate the canvasCenter
@@ -166,5 +180,28 @@ public class TargetIndicator : MonoBehaviour
 
         //return the angle as a rotation Vector
         return new Vector3(0f, 0f, angle);
+    }
+
+    private void checkDistance()
+    {
+        float distance = Vector3.Distance(player.transform.position, target.transform.position);
+        bool outOfRange = distance >= 50;
+        float alphaVal = 0;
+
+        if (outOfRange)
+        {
+            alphaVal = 0;
+        }
+        else
+        {
+            //Only works if max distance is 50
+            alphaVal = 1f / Mathf.Pow(2f, (0.1f * distance - 1f));
+        }
+
+        Debug.Log(alphaVal);
+        Color imageColor = TargetIndicatorImage.color;
+        imageColor.a = alphaVal;
+        TargetIndicatorImage.color = imageColor;
+        OffScreenTargetIndicator.color = imageColor;
     }
 }

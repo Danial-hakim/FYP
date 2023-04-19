@@ -8,11 +8,23 @@ public class Player : MonoBehaviour
     int currentHealth;
 
     public HealthBar healthbar;
+
+    UIController uiController;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
+
+        uiController = GetComponentInParent<UIController>();
+        if (uiController == null)
+        {
+            uiController = GameObject.Find("IndicatorMaster").GetComponent<UIController>();
+        }
+
+        if (uiController == null) Debug.LogError("No UIController component found");
+
+        uiController.SetupIndicatorMaster();
     }
 
     // Update is called once per frame

@@ -67,8 +67,6 @@ public class Enemy : MonoBehaviour
         }
 
         healZonePosition = transform.parent.Find("HealZone(Clone)").position;
-
-        Debug.Log(healZonePosition);
     }
 
     // Update is called once per frame
