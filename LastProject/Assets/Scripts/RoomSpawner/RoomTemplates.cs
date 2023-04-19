@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -40,6 +41,10 @@ public class RoomTemplates : MonoBehaviour
 
 	void buildMeshNow()
 	{
+		for (int i = 1; i < rooms.Count; i++)
+		{
+            rooms[i].GetComponent<EntitySpawner>().SpawnWallLayouts();
+        }
         for (int i = 0; i < rooms.Count; i++)
 		{
             rooms[i].GetComponent<NavMeshSurface>().BuildNavMesh();

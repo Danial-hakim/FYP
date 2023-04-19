@@ -507,7 +507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358809356}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9d765a21520fe64fb9cc40eed4542ce, type: 3}
   m_Name: 
@@ -1014,6 +1014,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1006292971567940284, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: wall_Layouts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -1006292971567940284, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: wall_Layouts.Array.data[0]
+      value: 
+      objectReference: {fileID: 515962289366262319, guid: 4e564561fee3719408d7deb69c61b587, type: 3}
+    - target: {fileID: -1006292971567940284, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: wall_Layouts.Array.data[1]
+      value: 
+      objectReference: {fileID: 5793475904693896930, guid: 48a95a83f5e0b8d4e8fa1062424ad293, type: 3}
+    - target: {fileID: -1006292971567940284, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: wall_Layouts.Array.data[2]
+      value: 
+      objectReference: {fileID: 6542648918405997217, guid: ac60eb5d71a7a58469bd5985322c82ae, type: 3}
+    - target: {fileID: -1006292971567940284, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
+      propertyPath: wall_Layouts.Array.data[3]
+      value: 
+      objectReference: {fileID: 3386079056952952514, guid: 3d3fc8164d0719e4b95abb9df2caa4cd, type: 3}
     - target: {fileID: 5632446563797049014, guid: 9880df4199bc9a247a2926f123b219e7, type: 3}
       propertyPath: m_Name
       value: Entry Room

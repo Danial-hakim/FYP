@@ -236,7 +236,6 @@ public class Enemy : MonoBehaviour
 
         // TODO: Calculate the damage reduction based on the remaining percentage
         damageReduction = damageReduction * remainingPercentage;
-        Debug.Log(slowedDuration);
     }
 
     float RemainderCalculation(float startingDuration, float resistanceType)
