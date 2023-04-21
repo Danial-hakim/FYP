@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public BaseState activeState;
-    public PatrolState patrolState;
-    public ChaseState chaseState;
-    public RetreatState retreatState;
+    private BaseState activeState;
+    private PatrolState patrolState;
+    private ChaseState chaseState;
+    private RetreatState retreatState;
+    private BaseState previousState;
 
+    Enemy enemy;
+     
+    double decision; // Decide what the ai do and how fast they should move , Look at fuzzy logic for more explaination
     //private bool playerIsFound;
     public void Initialise()
     {
+        enemy = GetComponent<Enemy>();
+
         chaseState = new ChaseState();
         patrolState = new PatrolState();
         retreatState = new RetreatState();
@@ -26,34 +32,42 @@ public class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(activeState != null)
+        decision = enemy.GetFuzzyLogic().initiateFuzzy(enemy.health);
+
+        if (enemy.GetComponent<FieldOfView>().canSeePlayer)
         {
-            activeState.Perform();
-        }
-        if (transform.GetComponent<FieldOfView>().canSeePlayer)
-        {
-            ChangeState(chaseState);
-        }
-        else if(transform.GetComponent<Enemy>().health < 50)
-        {
-            ChangeState(retreatState);
-            if(transform.GetComponent<Enemy>().health == 100)
-            {
-                ChangeState(chaseState);
-            }
+            MakeDecision(decision);
         }
         else
         {
-            ChangeState(patrolState);
+            if (decision < 0)
+            {
+                //Debug.Log("Heal up");
+                ChangeState(retreatState);
+                if (enemy.health == 100)
+                {
+                    //Debug.Log("Health is full, resume previous behavior");
+                    ChangeState(previousState);
+                }
+            }
+            else
+            {
+                //Debug.Log("Patrol the area");
+                ChangeState(patrolState);
+            }
+        }
+
+        if (activeState != null)
+        {
+            activeState.Perform(decision);
         }
     }
 
     public void ChangeState(BaseState newState)
     {
-        //First check if the enemy is in a state 
         if(activeState != null)
         {
-            //Exit current state to prepare for new state
+            previousState = activeState;
             activeState.Exit();
         }
 
@@ -64,6 +78,25 @@ public class StateMachine : MonoBehaviour
             activeState.stateMachine = this;
             activeState.enemy = GetComponent<Enemy>();
             activeState.Enter();
+        }
+    }
+
+    void MakeDecision(double decision)
+    {
+        if (decision > 0)
+        {
+            //Debug.Log("Chase player if player is found");
+            ChangeState(chaseState);
+        }
+        else if (decision < 0)
+        {
+            //Debug.Log("Heal up");
+            ChangeState(retreatState);
+        }
+        else
+        {
+            //Debug.Log("Keep doing what you're doing");
+            ChangeState(previousState);
         }
     }
 }

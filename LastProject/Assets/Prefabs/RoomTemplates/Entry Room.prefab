@@ -1184,6 +1184,8 @@ MonoBehaviour:
   - {fileID: 4791500337591272292, guid: 0ba31ad05e0b2994aab02b874afc3432, type: 3}
   - {fileID: 6533612505412257004, guid: 62e56c15f9cb18249991997ef8f6f535, type: 3}
   healZone: {fileID: 8291296532567729342, guid: f2929656585f15741a00ad1b9d283ac7, type: 3}
+  wall_Layouts: []
+  bossDoor: {fileID: 1809706597561321694, guid: 45089a80823e3204f8cc187250b5c381, type: 3}
 --- !u!1 &5632446563810290133
 GameObject:
   m_ObjectHideFlags: 0

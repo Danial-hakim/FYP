@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
 
     public HealthBar healthbar;
 
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Testing purpose , delete this 
        if(Input.GetKeyUp(KeyCode.L))
        {
             Damage();
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
         currentHealth -= 10;
         healthbar.SetHealth(currentHealth);
 
-        if(currentHealth < 0)
+        if(currentHealth <= 0)
         {
             gameoverScreen.SetActive(true);
             Time.timeScale = 0;
@@ -88,6 +89,11 @@ public class Player : MonoBehaviour
         if (other.tag == "Enemy" && currentHealth > 0)
         {
             Damage();
+        }
+
+        if(other.tag == "Portal")
+        {
+            Debug.Log("Win for now");
         }
     }
 

@@ -48,7 +48,11 @@ public class Enemy : MonoBehaviour
 
     public Vector3 healZonePosition { get; private set; }
 
-    bool healing;
+    float normalSpeed = 5;
+
+    FuzzyLogic fuzzyLogic;
+
+    public bool currentlyAffected { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +71,8 @@ public class Enemy : MonoBehaviour
         }
 
         healZonePosition = transform.parent.Find("HealZone(Clone)").position;
+
+        fuzzyLogic = GetComponent<FuzzyLogic>();
     }
 
     // Update is called once per frame
@@ -99,6 +105,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Frozen());
         }
         calculateRemainingHealth(damage);
+        //fuzzyLogic.initiateFuzzy(health);
     }
 
     IEnumerator FlashColor(Renderer renderer, float immuneDuration)
@@ -143,20 +150,18 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ReduceMoveSpeed()
     {
-        float currentSpeed = agent.speed;
-        agent.speed = currentSpeed * 0.5f;
+        agent.speed = normalSpeed * 0.5f;
         yield return new WaitForSeconds(slowedDuration);
-        agent.speed = currentSpeed;
+        agent.speed = normalSpeed;
         beingSlowed = false;
     }
 
     IEnumerator Frozen()
     {
-        float currentSpeed = agent.speed;
         agent.speed = 0;
         yield return new WaitForSeconds(freezeDuration);
-        agent.speed = currentSpeed;
-        beingSlowed = false;
+        agent.speed = normalSpeed;
+        currentlyFrozen = false;
     }
 
     public void increaseLihgtningResistance()
@@ -277,6 +282,11 @@ public class Enemy : MonoBehaviour
         {
             StopCoroutine("Heal");
         }
+    }
+
+    public FuzzyLogic GetFuzzyLogic() 
+    {
+        return fuzzyLogic;
     }
 }
   

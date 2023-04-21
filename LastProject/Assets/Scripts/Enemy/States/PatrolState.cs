@@ -9,21 +9,22 @@ public class PatrolState : BaseState
     int previousChoice;
     public override void Enter()
     {
-        enemy.Agent.speed = 3;
         enemy.setColor(Color.black);
     }
 
-    public override void Perform()
+    public override void Perform(double speed)
     {
-        PatrolCycle();
+        PatrolCycle(speed);
     }
 
     public override void Exit()
     {
     }
 
-    void PatrolCycle()
+    void PatrolCycle(double speed)
     {
+        speed = 5;
+        if (!enemy.beingSlowed && !enemy.currentlyFrozen) { enemy.Agent.speed = (float)speed; };
         if (enemy.Agent.remainingDistance < 1.5f)
         {
             waitTimer += Time.deltaTime;

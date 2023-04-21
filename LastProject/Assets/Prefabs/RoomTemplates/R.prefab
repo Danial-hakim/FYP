@@ -270,6 +270,7 @@ MonoBehaviour:
   - {fileID: 5793475904693896930, guid: 48a95a83f5e0b8d4e8fa1062424ad293, type: 3}
   - {fileID: 6542648918405997217, guid: ac60eb5d71a7a58469bd5985322c82ae, type: 3}
   - {fileID: 3386079056952952514, guid: 3d3fc8164d0719e4b95abb9df2caa4cd, type: 3}
+  bossDoor: {fileID: 1809706597561321694, guid: 45089a80823e3204f8cc187250b5c381, type: 3}
 --- !u!1 &1603943138012849351
 GameObject:
   m_ObjectHideFlags: 0

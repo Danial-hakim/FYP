@@ -17,9 +17,12 @@ public class RoomTemplates : MonoBehaviour
 
 	public float waitTime = 10;
 	private bool builtNavMesh;
-	public GameObject boss;
+
+	private bool bossDoorSpawned;
 
 	int clearedRoomCounter;
+
+    int requiredRoomCleared;
 	void Update()
 	{
 		if (waitTime <= 0 && builtNavMesh == false)
@@ -28,6 +31,12 @@ public class RoomTemplates : MonoBehaviour
 			{
 				if (i == rooms.Count - 1)
 				{
+                    requiredRoomCleared = (int)(rooms.Count * 0.7);
+                    if(requiredRoomCleared > 12)
+                    {
+                        requiredRoomCleared = 12;
+                    }
+                    Debug.Log(requiredRoomCleared);
 					buildMeshNow();
 					builtNavMesh = true;
 				}
@@ -40,24 +49,24 @@ public class RoomTemplates : MonoBehaviour
 
 		if(waitTime <= 0) { waitTime = 0; }
 
-		foreach(var room in rooms)
-		{
-			if(room.GetComponent<EntitySpawner>().cleared)
-			{
-				clearedRoomCounter++;
-			}
-			else
-			{
-				clearedRoomCounter = 0;
-				break;
-			}
-		}
-
-		if(clearedRoomCounter == rooms.Count)
-		{
-			Debug.Log("Spawn boss");
-		}
-	}
+        foreach (var room in rooms)
+        {
+            if (room.GetComponent<EntitySpawner>().cleared)
+            {
+                clearedRoomCounter++;
+                if (clearedRoomCounter >= 2 && !bossDoorSpawned) // Always plus 1 due to entry room
+                {
+                    Debug.Log("Spawn boss door");
+                    rooms[0].GetComponent<EntitySpawner>().SpawnBossDoor();
+                    bossDoorSpawned = true;
+                }
+            }
+            else
+            {
+                clearedRoomCounter = 0;
+            }
+        }
+    }
 
 	void buildMeshNow()
 	{

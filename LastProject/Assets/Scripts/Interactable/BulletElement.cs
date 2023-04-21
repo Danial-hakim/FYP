@@ -20,6 +20,7 @@ public class BulletElement : Interactable
 
     protected override void Interact()
     {
+        //Working on putting in fuzzy logic n makin sure the elements working , need to do boss battle after player kill certain number of enemies , open a portal , go new scene n fight boss
         GameObject.FindGameObjectWithTag("Gun").GetComponent<ProjectileGun>().UpdateElement(renderer);
     }
 }

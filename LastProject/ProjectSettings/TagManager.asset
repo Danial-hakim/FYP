@@ -11,6 +11,7 @@ TagManager:
   - Rooms
   - Gun
   - Bullet
+  - Portal
   layers:
   - Default
   - TransparentFX

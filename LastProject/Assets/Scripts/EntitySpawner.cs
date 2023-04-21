@@ -13,6 +13,8 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField]GameObject healZone;
     [SerializeField]GameObject[] wall_Layouts;
 
+    [SerializeField]GameObject bossDoor;
+
     int counter;
     private int previousCount;
     public bool cleared { get; set; }
@@ -33,9 +35,10 @@ public class EntitySpawner : MonoBehaviour
                 previousCount = counter;
             }
 
-            if (counter == 0)
+            if (counter == 0 && !cleared)
             {
                 cleared = true;
+                Debug.Log("cleared");
             }
         }   
     }
@@ -104,5 +107,12 @@ public class EntitySpawner : MonoBehaviour
         Vector3 centerPosition = transform.position;
         int rand = Random.Range(0, wall_Layouts.Length);
         Instantiate(wall_Layouts[rand], centerPosition, Quaternion.identity, transform);
+    }
+
+    public void SpawnBossDoor()
+    {
+        Vector3 centerPosition = transform.position;
+
+        Instantiate(bossDoor, centerPosition, Quaternion.identity);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FuzzyLogic : MonoBehaviour
 {
-    public float playerHealth;
+    float playerHealth;
     //public float enemyHealth;
 
     double pDying;
@@ -24,7 +24,7 @@ public class FuzzyLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -56,6 +56,11 @@ public class FuzzyLogic : MonoBehaviour
     {
         double result = 0;
         double x = value;
+
+        if(x == x3)
+        {
+            x = x - 1;
+        }
 
         if((x <= x0) || (x >= x3))
         {
@@ -117,16 +122,16 @@ public class FuzzyLogic : MonoBehaviour
 
         // if the value is negative , ai is retreating 
         double speed = ((mlow * lowSpeed) + (mMid * midSpeed) + (mHigh * highSpeed)) / (mlow + mMid + mHigh);
-        Debug.Log(mlow);
-        Debug.Log(mMid);
-        Debug.Log(mHigh);
-        Debug.Log(speed);
-        return 0;
+
+        return speed;
     }
 
-    public void initiateFuzzy(float enemyHealth)
+    public double initiateFuzzy(float enemyHealth)
     {
-        //playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<>
+        double result;
+
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().currentHealth;
+
         pDying = FuzzyTrapeZoid(playerHealth, 0, 10, 35, 45);
         eDying = FuzzyTrapeZoid(enemyHealth, 0, 10, 35, 45);
 
@@ -137,14 +142,18 @@ public class FuzzyLogic : MonoBehaviour
         eHealthy = FuzzyTrapeZoid(enemyHealth, 55, 70, 95, 100);
 
         total = pDying + pHurt + pHealthy;
+        double enemyTotal = eDying + eHurt + eHealthy;
 
         pDying = normalized(pDying, total);
         pHurt = normalized(pHurt, total);
         pHealthy = normalized(pHealthy, total);
 
-        Debug.Log("Player is " + pDying + " : " + pHurt + " : " + pHealthy);
-        Debug.Log("Enemy is " + eDying + " : " + eHurt + " : " + eHealthy);
+        eDying = normalized(eDying, enemyTotal);
+        eHurt = normalized(eHurt, enemyTotal);
+        eHealthy = normalized(eHealthy, enemyTotal);
 
-        Fuzzification();
+        result = Fuzzification();
+        
+        return result;
     }
 }
