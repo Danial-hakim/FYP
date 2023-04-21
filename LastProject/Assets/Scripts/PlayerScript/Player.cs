@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,10 @@ public class Player : MonoBehaviour
     [SerializeField]GameObject magnifer;
 
     [SerializeField]GameObject gameoverScreen;
+
+    [SerializeField]TextMeshProUGUI resultText;
+
+    bool gameIsOver;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +58,7 @@ public class Player : MonoBehaviour
             HandleMagnifer();
        }
 
-        if (currentHealth <= 0 && Input.GetKeyUp(KeyCode.M))
+        if (gameIsOver && Input.GetKeyUp(KeyCode.M))
         {
             AllowRestartScene();
         }
@@ -66,8 +71,7 @@ public class Player : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            gameoverScreen.SetActive(true);
-            Time.timeScale = 0;
+            UpdateResultText("You Lose\nPress M to Restart");
         }
     }
 
@@ -93,7 +97,7 @@ public class Player : MonoBehaviour
 
         if(other.tag == "Portal")
         {
-            Debug.Log("Win for now");
+            UpdateResultText("You Win\nPress M to Restart");
         }
     }
 
@@ -101,5 +105,22 @@ public class Player : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+    }
+
+    void UpdateResultText(string result)
+    {
+        gameoverScreen.SetActive(true);
+        Time.timeScale = 0;
+        // Split the result string into two lines using "\n" as the line break
+        string[] lines = result.Split('\n');
+        if (lines.Length >= 2)
+        {
+            resultText.text = lines[0] + "\n" + lines[1];
+        }
+        else
+        {
+            resultText.text = result;
+        }
+        gameIsOver = true;
     }
 }

@@ -652,9 +652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7974248e5dba84ca11d4ad0d4e31d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
   healthbar: {fileID: 1797846163022730755}
   magnifer: {fileID: 2103827965}
   gameoverScreen: {fileID: 5686278444038328221}
+  resultText: {fileID: 4536322123069320942}
 --- !u!136 &7517377695309224394
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ GameObject:
   - component: {fileID: 5429543845617709607}
   - component: {fileID: 4536322123069320942}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,7 +749,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
