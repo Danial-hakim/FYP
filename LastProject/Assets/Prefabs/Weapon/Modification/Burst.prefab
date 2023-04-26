@@ -115,7 +115,7 @@ MonoBehaviour:
   shootForce: 200
   upwardForce: 0
   spread: 0
-  bulletPerTap: 4
+  bulletPerTap: 3
   allowButtonHold: 0
   timeBetweenShot: 0.05
   timeBetweenShooting: 0.5
